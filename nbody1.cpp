@@ -12,6 +12,14 @@ struct Body{
 	double M;
 	double r[2], v[2], a[2]; // defines acceleration of the body in the x and y directions; a[0] = a_x, a[1] = a_y; and likewise for r and v
 	
+	Body(double mass, double x, double y, double vel_x, double vel_y){ //constructor
+		M = mass;
+		r[0] = x;
+		r[1] = y;
+		v[0] = vel_x;
+		v[1] = vel_y;
+	}
+	
 	void acceleration_update(Body body){
 		double r_ = sqrt((body.r[0] - r[0])*(body.r[0] -r[0]) + (body.r[1] - r[1])*(body.r[1] - r[1]));
 		a[0] = G*(body.r[0] - r[0])/(r_*r_*r_);
@@ -41,9 +49,10 @@ int main(){
 
 	// LEAPFROG INTEGRAL //
 	Body body1, body2;
-	body1.M = 1; body2.M = 1;
-	body1.r[0] = 0; body1.r[1] = 0; body1.v[0] = 0; body1.v[1] = 0;
-	body2.r[0] = 5; body2.r[1] = 0; body2.v[0] = 0; body2.v[1] = 0;
+	
+	body1(1,0,0,1,1);
+	body2(1,5,0,-3,4);
+	
 	body1.acceleration_update(body2);
 	body2.acceleration_update(body1); 
 	//sets up initial accelerations of the bodies
