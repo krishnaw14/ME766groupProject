@@ -12,14 +12,6 @@ struct Body{
 	double M;
 	double r[2], v[2], a[2]; // defines acceleration of the body in the x and y directions; a[0] = a_x, a[1] = a_y; and likewise for r and v
 	
-	/* vector<double>* acceleration(Body body){
-		//returns a pointer to the acceleration vector
-		double r = sqrt((body.X - X)*(body.X -X) + (body.Y - Y)*(body.Y - Y));
-		new vector<double> F;
-		double F
-		F.push_back()
-
-	} */
 	void acceleration_update(Body body){
 		double r_ = sqrt((body.r[0] - r[0])*(body.r[0] -r[0]) + (body.r[1] - r[1])*(body.r[1] - r[1]));
 		a[0] = G*(body.r[0] - r[0])/(r_*r_*r_);
