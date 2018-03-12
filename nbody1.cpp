@@ -28,17 +28,17 @@ struct Body{
 	}
 
 	void r_update(Body body){
-		r[0] = r[0] + v[0]*timestep + (1/2)*a[0]*timestep*timestep ;
-		r[1] = r[1] + v[1]*timestep + (1/2)*a[1]*timestep*timestep ;
+		r[0] = r[0] + v[0]*timestep + (1.0/2)*a[0]*timestep*timestep ;
+		r[1] = r[1] + v[1]*timestep + (1.0/2)*a[1]*timestep*timestep ;
 		return;
 	}
 	void v_update(Body body){
-		v[0] = v[0] + (1/2)*a[0]*timestep;
-		v[1] = v[1] + (1/2)*a[1]*timestep;
+		v[0] = v[0] + (1.0/2)*a[0]*timestep;
+		v[1] = v[1] + (1.0/2)*a[1]*timestep;
 
 		(*this).acceleration_update(body); // now, a_present = a_(i+1)
-		v[0] = v[0] + (1/2)*a[0]*timestep;
-		v[1] = v[1] + (1/2)*a[1]*timestep;
+		v[0] = v[0] + (1.0/2)*a[0]*timestep;
+		v[1] = v[1] + (1.0/2)*a[1]*timestep;
 		return;
 	}
 };
