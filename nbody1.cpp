@@ -48,10 +48,8 @@ int main(){
 	// Xj_o, Yj_o, Uj_o, Vj_o are known for j = 1 , 2 
 
 	// LEAPFROG INTEGRAL //
-	Body body1, body2;
-	
-	body1(1,0,0,1,1);
-	body2(1,5,0,-3,4);
+	Body body1(1,0,0,1,1);
+	Body body2(1,5,0,-3,4);
 	
 	body1.acceleration_update(body2);
 	body2.acceleration_update(body1); 
@@ -69,7 +67,7 @@ int main(){
 	trajectory_body_y[0] = body1.r[1];
 	trajectory_body_y[h] = body2.r[1]; 
 
-	for(int i=1; i<2*h; i++){
+	for(int i=1; i<h; i++){
 		body1.r_update(body2);
 		body1.v_update(body2);
 
