@@ -1,12 +1,15 @@
 #include<iostream>
 #include<stdlib.h>
 #include<math.h>
+#include<fstream> //enables export to csv files
+//#include"twobodystruct.h"
+
 using namespace std;
 
-const double G = 0.000000000066741;  //True value of .0000000000667408 rounded off to 15 decimal places (precision of double)
-const double M1 = 1; //for present analysis
-const double M2 = 1; //for present analysis
-const double timestep = 0.025; // small time step in seconds
+const double G = 0.00066741;  //True value of .0000000000667408 rounded off to 15 decimal places (precision of double)
+const long long int M1 = pow(10,17); //for present analysis
+const long long int M2 = pow(10,17); //for present analysis
+const double timestep = 0.0025; // small time step in seconds
 
 struct Body{ 
 	double M;
@@ -42,14 +45,15 @@ struct Body{
 		return;
 	}
 };
+
 int main(){
 	// all the physical properties are in S.I. units
 	// 6N equations for N bodies
 	// Xj_o, Yj_o, Uj_o, Vj_o are known for j = 1 , 2 
 
 	// LEAPFROG INTEGRAL //
-	Body body1(1,0,0,1,1);
-	Body body2(1,5,0,-3,4);
+	Body body1(M1,0,0,0,100);
+	Body body2(M2,1,0,0,-100);
 	
 	body1.acceleration_update(body2);
 	body2.acceleration_update(body1); 
@@ -74,7 +78,7 @@ int main(){
 		body2.r_update(body1);
 		body2.v_update(body1);
 
-		//storing the trajectory//
+		//storing the trajectory in an array//
 
 		trajectory_body_x[i] = body1.r[0];
 		trajectory_body_x[i+h] = body2.r[0];
@@ -82,7 +86,22 @@ int main(){
 		trajectory_body_y[i+h] = body2.r[1];
 	}
 
-	for (int i = 0; i < h; i++)
+	ofstream myfile;
+    	myfile.open ("body1sim.csv");
+    	for(int i=0; i<h; i++){
+    		myfile << trajectory_body_x[i]<<trajectory_body_y[i]<<"\n" ;
+    	}
+    	myfile.close();
+
+    ofstream myfile_;
+    	myfile.open ("body2sim.csv");
+    	for(int i=h; i<2*h; i++){
+    		myfile_ << trajectory_body_x[i]<<trajectory_body_y[i]<<"\n";
+    	}
+    	myfile_.close();
+      
+
+	/*for (int i = 0; i < h; i++)
 	{
 		cout<<trajectory_body_x[i]<<" "<<trajectory_body_y[i]<<endl;
 	}
@@ -91,5 +110,5 @@ int main(){
 	for (int i = 0; i < h; i++)
 	{
 		cout<<trajectory_body_x[i+h]<<" "<<trajectory_body_y[i+h]<<endl;
-	}
+	}*/
 }
