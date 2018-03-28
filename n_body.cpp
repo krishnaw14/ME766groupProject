@@ -72,6 +72,12 @@ int main()
 
 	//Initialize position, velocity and mass of each body
 
+	body_array[0](M1, 0, 0, 100, 0);
+	body_array[1](2*M1,5, 0, -100, 0);
+	body_array[2](3*M1, 10, 0, 200, 50);
+	body_array[3](4*M1, 15, 0, 300, -350);
+	body_array[4](5*M1, 20, 0, 400, 800);
+
 	for (int i=0;i<n;i++)
 		body_array[i].acceleration_update(body_array, n); //sets up initial accelerations of the bodies
 
