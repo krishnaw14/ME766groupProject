@@ -174,6 +174,14 @@ struct BHTree_node{
 		}
 	}
 
+	void updateForce(Body b){
+		// visit each node starting from the root node
+		//check if it is an internal node or external node
+		//if internal node; s/d < tolerance value
+		// if s/d > tolerance value; recurse for children
+		//if external node reached; compute the force acting on the calling body due to the body represented by this node
+	}
+
 };
 
 int main(){
