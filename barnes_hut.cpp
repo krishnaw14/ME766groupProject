@@ -1,5 +1,6 @@
 #include<iostream>
-//using namespace std;
+#include<math.h>
+using namespace std;
 
 struct Point{
 	double x,y;
@@ -13,6 +14,11 @@ struct Point{
 		y = y_;
 	}
 };
+
+double distance(Point a, Point b){
+	/* returns the distance between the two input points */
+	return sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y)) ;
+}
 
 struct Quadrant{
 	Point origin; // coordinates of the origin of the quadrant
@@ -174,12 +180,46 @@ struct BHTree_node{
 		}
 	}
 
-	void updateForce(Body b){
-		// visit each node starting from the root node
-		//check if it is an internal node or external node
-		//if internal node; s/d < tolerance value
-		// if s/d > tolerance value; recurse for children
-		//if external node reached; compute the force acting on the calling body due to the body represented by this node
+	void updateForce(BHTree_node* Tree,Body b){
+		/* 
+		Visit each node starting from the root node
+		
+		Check if it is an internal node or external node
+		
+		If internal node and s/d < tolerance value (where s is the dimension of the region representing the node), compute
+		force exerted by this body (stationed at the COM of the group of bodies) on the input body
+		
+		If s/d > tolerance value; recurse for the children nodes
+		
+		If external node is reached; compute the force acting on the input body due to the body represented by this node 
+		*/
+
+		if (Tree->number_of_bodies > 1){
+			/* for internal node */
+			if( (Tree->region.dimension)/(distance(b.coordinates, Tree->body.coordinates)) < 0.5 ){
+				/* update force due to the body at the node */
+			}
+			else{
+				// recursing on children
+				updateForce(Tree->NW, b);
+				updateForce(Tree->NE, b);
+				updateForce(Tree->SW, b);
+				updateForce(Tree->SE, b);
+			}
+
+		}
+		else if (Tree->number_of_bodies = 1){ 
+			/* BASE CASE */
+			/* for populated external nodes */
+			
+			//double distance_ = distance(b.coordinates, Tree->body.coordinates);
+
+			/*  DEVELOPER NOTES: 
+				NEED TO DEFINE VELOCITY VECTOR AND ACCELERATION VECTOR FOR EACH BODY WHERE UPDATES CAN BE MADE; NEED TO MODIFY THE
+				BODY STRUCT PERHAPS OR SOME OTHER
+			 */
+			
+		}
 	}
 
 };
