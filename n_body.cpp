@@ -68,6 +68,16 @@ struct Body
 		cout<<"x = "<<r[0]<<" y = "<<r[1]<<endl;
 	}
 
+=======
+	/*
+	void operator()(double mass, double x, double y, double vel_x, double vel_y){
+		M = mass;
+		r[0] = x;
+		r[1] = y;
+		v[0] = vel_x;
+		v[1] = vel_y;
+		return;
+	}*/
 };
 
 int main()
