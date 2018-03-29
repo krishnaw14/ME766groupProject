@@ -1,6 +1,10 @@
 #include<iostream>
 #include<math.h>
+#include<vector>
 using namespace std;
+
+const G = 1; // change later; use symbolically for now
+
 
 struct Point{
 	double x,y;
@@ -104,6 +108,23 @@ struct Body{
 	double mass; // mass of the body or COM of a group of bodies
 	Point coordinates; //coordinates of the body or COM of a group of bodies
 
+	std::vector<double> velocity;
+	std::vector<double> acceleration;
+
+	/* DEVELOPER NOTES: Define a constructor for the body data-type to initialise the velocity and acceleration vectors; maybe include this in the default constructor */
+
+	Body(){
+		/* default constructor to initialise velocity and acceleration vectors among other physical parameters */
+		mass = 0;
+		coordinates.x = 0;
+		coordinates.y = 0;
+		velocity[0] = 0;
+		velocity[1] = 0;
+		acceleration[0] = 0;
+		acceleration[1] = 0;
+		// now we can use the updateForce() member function as initialisation is done 
+	}
+
 	bool in(Quadrant q){
 		/* checks whether the body is in a quadrant or not */
 		return q.contains(coordinates.x, coordinates.y);
@@ -115,6 +136,13 @@ struct Body{
 		newbody->mass = a.mass + b.mass;
 		(newbody->coordinates).x = (a.mass*(a.coordinates.x) + b.mass*(b.coordinates.x))/(newbody->mass) ;
 		(newbody->coordinates).y = (a.mass*(a.coordinates.y) + b.mass*(b.coordinates.y))/(newbody->mass) ;
+
+		newbody->velocity[0] = (a.mass*(a.velocity[0]) + b.mass*(b.velocity[0]))/(newbody->mass) ;
+		newbody->velocity[1] = (a.mass*(a.velocity[1]) + b.mass*(b.velocity[1]))/(newbody->mass) ;
+
+		newbody->acceleration[0] = (a.mass*(a.acceleration[0]) + b.mass*(b.acceleration[0]))/(newbody->mass) ;
+		newbody->acceleration[1] = (a.mass*(a.acceleration[1]) + b.mass*(b.acceleration[1]))/(newbody->mass) ;
+
 		return newbody; 
 	}
 };
@@ -137,10 +165,20 @@ struct BHTree_node{
 		/* constructor to create a Barnes-Hut Tree with no bodies and the given quadrant */
 		// might need to do operator overloading = (assignment operator) for the Quadrant data-type
 		region = q;
-		body.mass = 0; //no body
-		body.coordinates.x = 0; //initialising
-		body.coordinates.y = 0; //initialising
+		/* initialising */
+		body.mass = 0; 
+		body.coordinates.x = 0;
+		body.coordinates.y = 0; 
+
+		body.velocity[0] = 0; 
+		body.velocity[1] = 0; 
+
+		body.acceleration[0] = 0; 
+		body.acceleration[1] = 0; 
+
 		number_of_bodies = 0;
+
+		NW = NE = SW = SE = NULL;
 	}
 
 	void insert(BHTree_node* Tree,Body b){ 
@@ -162,8 +200,17 @@ struct BHTree_node{
 			Tree->body.mass =  Tree->body.mass + b.mass;
 			Tree->number_of_bodies = Tree->number_of_bodies + 1 ;
 
+			/* DEVELOPER NOTES: No need to initialise velocity and acceleration vectors for any node except the external nodes; memory and time inefficient */
+			Tree->body.velocity[0] = ( (Tree->body.mass)*(Tree->body.velocity[0]) + (b.mass)*(b.velocity[0]) )/(b.mass +Tree->body.mass);
+			Tree->body.velocity[1] = ( (Tree->body.mass)*(Tree->body.velocity[1]) + (b.mass)*(b.velocity[1]) )/(b.mass +Tree->body.mass);
+
+			Tree->body.acceleration[0] = ( (Tree->body.mass)*(Tree->body.acceleration[0]) + (b.mass)*(b.acceleration[0]) )/(b.mass +Tree->body.mass);
+			Tree->body.acceleration[1] = ( (Tree->body.mass)*(Tree->body.acceleration[1]) + (b.mass)*(b.acceleration[1]) )/(b.mass +Tree->body.mass);
+
 			/* checking in which subquadrant of the invoking quadrant does the body lie */
 			int subquad = Tree->region.which_subquad_contain(b.coordinates); 
+
+			/* inserting body in the child nodes */
 
 			if(subquad == 1){
 				return insert(Tree->NW, b);
@@ -179,6 +226,11 @@ struct BHTree_node{
 			}
 		}
 	}
+
+
+		/* DEVELOPER NOTE: Modify the default constructor such that while initialising the body data type; accelerations are equal to zero; 
+			because we are using += in the updateForce() member function */
+
 
 	void updateForce(BHTree_node* Tree,Body b){
 		/* 
@@ -198,6 +250,10 @@ struct BHTree_node{
 			/* for internal node */
 			if( (Tree->region.dimension)/(distance(b.coordinates, Tree->body.coordinates)) < 0.5 ){
 				/* update force due to the body at the node */
+				double distance_ = distance(b.coordinates, Tree->body.coordinates);
+				b.acceleration[0] +=  G*(Tree->body.mass)*(Tree->body.coordinates.x - b.coordinates.x)/(distance_*distance_*distance_);
+				b.acceleration[1] +=  G*(Tree->body.mass)*(Tree->body.coordinates.y - b.coordinates.y)/(distance_*distance_*distance_);
+				return;
 			}
 			else{
 				// recursing on children
@@ -209,21 +265,20 @@ struct BHTree_node{
 
 		}
 		else if (Tree->number_of_bodies = 1){ 
-			/* BASE CASE */
 			/* for populated external nodes */
-			
-			//double distance_ = distance(b.coordinates, Tree->body.coordinates);
-
-			/*  DEVELOPER NOTES: 
-				NEED TO DEFINE VELOCITY VECTOR AND ACCELERATION VECTOR FOR EACH BODY WHERE UPDATES CAN BE MADE; NEED TO MODIFY THE
-				BODY STRUCT PERHAPS OR SOME OTHER
-			 */
-			
+			double distance_ = distance(b.coordinates, Tree->body.coordinates);
+			b.acceleration[0] +=  G*(Tree->body.mass)*(Tree->body.coordinates.x - b.coordinates.x)/(distance_*distance_*distance_);
+			b.acceleration[1] +=  G*(Tree->body.mass)*(Tree->body.coordinates.y - b.coordinates.y)/(distance_*distance_*distance_);
+			return;
 		}
 	}
-
 };
 
 int main(){
-	
+	/*
+ 	For each step of the simulation, create a new Barnes-Hut tree from scratch, and insert all of the bodies.
+ 	Since the Barnes-Hut tree represents a finite region in the plane, only insert those bodies that are inside the boundaries. 
+ 	After inserting all of the bodies, reset the net forces acting on each body and call updateForce for each body to re-calculate them. 
+ 	Then, update the positions of the bodies and plot them using Turtle graphics.
+	*/
 }
