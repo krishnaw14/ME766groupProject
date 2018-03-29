@@ -3,8 +3,8 @@
 #include<vector>
 using namespace std;
 
-const G = 1; // change later; use symbolically for now
-
+const double G = 1; // change later; use symbolically for now
+const double a = 1; // change later; use symbolically for now; defines the geometric scale of the problem s
 
 struct Point{
 	double x,y;
@@ -28,6 +28,17 @@ struct Quadrant{
 	Point origin; // coordinates of the origin of the quadrant
 	double dimension; // side length of the quadrant
 	
+	Quadrant(){
+		/* default constructor */
+	}
+
+	Quadrant(double x_, double y_, double dimension_){
+		/* constructor */
+		origin.x = x_;
+		origin.y = y_;
+		dimension = dimension_;
+	}
+
 	bool contains(double x_ , double y_){
 
 		/* checks whether a point is contained in the quadrant */
@@ -183,12 +194,19 @@ struct BHTree_node{
 
 	void insert(BHTree_node* Tree,Body b){ 
 		if(Tree == NULL){ // for an empty node
-			Tree = new BHTree_node;
+			/* DEVELOPER NOTE: What if the Tree pointer points to a tree with zero bodies; Tree != NULL but the same task should be performed */
+			Quadrant q(0,0,a);
+			/* a defines the geometric scale of the problem, is a constant and is defined along with G at the start */
+			Tree = new BHTree_node(q);
 			Tree->body = b;
 			Tree->number_of_bodies =  1 ;
-			Tree->NW = Tree->NE = Tree->SW = Tree->SE = NULL;
+			Tree->NW = Tree->NE = Tree->SW = Tree->SE = NULL; //maybe need to delete; will be already done by the constructor
 			
 			//Pending: initialise the quadrant info
+
+			/* initialise the quadrant info using the constructor BHTree_node(Quadrant q) */
+
+			/* DEVELOPER NOTES : OH, GOT IT; THE MEMBER FUNCTIONS NW, NE ,SW ,SE OF THE STRUCT QUADRANT WILL NOW GET USED */
 
 			return; 
 		}
