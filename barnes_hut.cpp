@@ -144,6 +144,10 @@ struct Body{
 
 		return ; 
 	}
+
+	void positionUpdate(){
+
+	}
 };
 
 struct BHTreeNode{
@@ -303,4 +307,45 @@ int main(){
  	After inserting all of the bodies, reset the net forces acting on each body and call updateForce for each body to re-calculate them. 
  	Then, update the positions of the bodies and plot them using Turtle graphics.
 	*/
+	double timestep;
+	double duration;
+	cin>>timestep>>duration;
+
+	int h = duration/timestep; // number of iterations
+
+	//create a seperate insert file but for now; create an array of bodies
+	
+	Body body[100];
+	//initialise the bodies
+
+	for (int i = 0; i < h; i++)
+	{
+		BHTreeNode RootNode(/* initialise this with a suitable bounding box */);
+
+		for (int j = 0; j < 100; j++)
+		{
+			RootNode.insert(body[j]);
+		}
+
+		cout<<"Time = "<<(i+1)*timestep<<" seconds"<<endl;
+
+		for (int j = 0; j < 100; j++)
+		{
+			RootNode.updateForce(body[j]);
+
+			body[j].coordinates.x = body[j].coordinates.x + timestep*body[j].velocity[0] + (1/2)*timestep*timestep*body[j].acceleration[0];
+			body[j].coordinates.y = body[j].coordinates.y + timestep*body[j].velocity[1] + (1/2)*timestep*timestep*body[j].acceleration[1];
+
+			body[j].velocity[0] = body[j].velocity[0] + timestep*body[j].acceleration[0];
+			body[j].velocity[1] = body[j].velocity[1] + timestep*body[j].acceleration[1];
+
+			cout<<"Body "<<j<<" ("<<body[j].coordinates.x<<","<<body[j].coordinates.y<<")"<<endl;
+		}
+		cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
+	}
 }
+
+/* 																			DEVELOPER NOTES 
+1. COMPUTE BOUNDING BOX AROUND ALL THE BODIES
+2. IN updateForce() FUNCTION; 0/0 FORM MIGHT BE ENCOUNTERED; IF THE COM OF A GROUP LIES AT THE BODY'S coordinates ; ALSO ONE BODY CANNOT EXERT A FORCE ON ITSELF 
+*/
