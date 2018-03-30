@@ -1,6 +1,10 @@
 #include<iostream>
 #include<math.h>
+#include<vector>
 using namespace std;
+
+const double G = 1; // change later; use symbolically for now
+const double a = 1; // change later; use symbolically for now; defines the geometric scale of the problem s
 
 struct Point{
 	double x,y;
@@ -24,6 +28,10 @@ struct Quadrant{
 	Point origin; // coordinates of the origin of the quadrant
 	double dimension; // side length of the quadrant
 	
+	Quadrant(){
+		/* default constructor */
+	}
+
 	bool contains(double x_ , double y_){
 
 		/* checks whether a point is contained in the quadrant */
@@ -78,7 +86,7 @@ struct Quadrant{
 		return south_east;
 	}
 
-	int which_subquad_contain(Point p){
+	int GetQuadrant(Point p){
 		/* A method which tells in which sub-quadrant of the invoking quadrant does the point lie; 
 		return 1 for NW, 2 for NE, 3 for SW, 4 for SE */
 
@@ -104,126 +112,239 @@ struct Body{
 	double mass; // mass of the body or COM of a group of bodies
 	Point coordinates; //coordinates of the body or COM of a group of bodies
 
+	std::vector<double> velocity;
+	std::vector<double> acceleration;
+
+	Body(){
+		mass = 0;
+		coordinates.x = 0;
+		coordinates.y = 0;
+		velocity[0] = 0;
+		velocity[1] = 0;
+		acceleration[0] = 0;
+		acceleration[1] = 0;
+	}
+
 	bool in(Quadrant q){
 		/* checks whether the body is in a quadrant or not */
 		return q.contains(coordinates.x, coordinates.y);
 	}
 
-	Body* add(Body a, Body b){
+	void add(Body a){
 		/* returns a new body with the same parameters as that of the center of mass of bodies A and B */
-		Body* newbody = new Body;
-		newbody->mass = a.mass + b.mass;
-		(newbody->coordinates).x = (a.mass*(a.coordinates.x) + b.mass*(b.coordinates.x))/(newbody->mass) ;
-		(newbody->coordinates).y = (a.mass*(a.coordinates.y) + b.mass*(b.coordinates.y))/(newbody->mass) ;
-		return newbody; 
+		mass = a.mass + mass;
+		coordinates.x = (a.mass*(a.coordinates.x) + mass*(coordinates.x))/mass ;
+		coordinates.y = (a.mass*(a.coordinates.y) + mass*(coordinates.y))/mass ;
+
+		velocity[0] = (a.mass*(a.velocity[0]) + mass*(velocity[0]))/mass ;
+		velocity[1] = (a.mass*(a.velocity[1]) + mass*(velocity[1]))/mass ;
+
+		acceleration[0] = (a.mass*(a.acceleration[0]) + mass*(acceleration[0]))/mass ;
+		acceleration[1] = (a.mass*(a.acceleration[1]) + mass*(acceleration[1]))/mass ;
+
+		return ; 
+	}
+
+	void positionUpdate(){
+
 	}
 };
 
-struct BHTree_node{
-	/* A Barnes-Hut Tree contains contains some data, a body and a quadrant */
+struct BHTreeNode{
 	Body body;
-	Quadrant region;
-	BHTree_node* NW ; // pointers to the four sub-trees/sub-regions; children nodes
-	BHTree_node* NE ;
-	BHTree_node* SW ;
-	BHTree_node* SE ;
-	int number_of_bodies; 
+	Quadrant Region;
+	BHTreeNode* NW ; // four sub-trees/sub-regions; children nodes
+	BHTreeNode* NE ;
+	BHTreeNode* SW ;
+	BHTreeNode* SE ;
+	int NumberOfBodies; 
 
-	BHTree_node(){
+	BHTreeNode(){
 		/* default constructor */
+		NumberOfBodies = 0;
+		NW->NumberOfBodies = 0;
+		NE->NumberOfBodies = 0;
+		SW->NumberOfBodies = 0;
+		SE->NumberOfBodies = 0;
+		
+		NW->Region = *( Region.NW() );
+		NE->Region = *( Region.NE() );
+		SW->Region = *( Region.SW() );
+		SE->Region = *( Region.SE() );
 	}
 
-	BHTree_node(Quadrant q){
+	BHTreeNode(Quadrant Q){
 		/* constructor to create a Barnes-Hut Tree with no bodies and the given quadrant */
-		// might need to do operator overloading = (assignment operator) for the Quadrant data-type
-		region = q;
-		body.mass = 0; //no body
-		body.coordinates.x = 0; //initialising
-		body.coordinates.y = 0; //initialising
-		number_of_bodies = 0;
+		Region = Q;
+		/* initialising */
+		NumberOfBodies = 0;
+		NW->Region = *( Region.NW() );
+		NE->Region = *( Region.NE() );
+		SW->Region = *( Region.SW() );
+		SE->Region = *( Region.SE() );
+
+		// 'body' member variable is already initialised because of Body's default constructor
 	}
 
-	void insert(BHTree_node* Tree,Body b){ 
-		if(Tree == NULL){ // for an empty node
-			Tree = new BHTree_node;
-			Tree->body = b;
-			Tree->number_of_bodies =  1 ;
-			Tree->NW = Tree->NE = Tree->SW = Tree->SE = NULL;
-			
-			//Pending: initialise the quadrant info
-
+	void insert(Body b){ 
+	/*  ALGORITHM
+		1. If node x does not contain a body, put the new body b here.
+		2. If node x is an internal node, update the center-of-mass and total mass of x. Recursively insert the body b in the appropriate quadrant.
+		3. If node x is an external node, say containing a body named c, then there are two bodies b and c in the same region. 
+		   Subdivide the region further by creating four children. Then, recursively insert both b and c into the appropriate quadrant(s). 
+		   Since b and c may still end up in the same quadrant, there may be several subdivisions during a single insertion.
+		   Finally, update the center-of-mass and total mass of x.
+	*/
+		
+		if(NumberOfBodies == 0){ // EMPTY NODE
+			body = b;
+			NumberOfBodies =  1 ;
 			return; 
 		}
-		else{
-			// updating the mass and the position of COM for the invoking node/parent node
+		else if (NumberOfBodies > 1){ // INTERNAL NODE
 			
-			Tree->body.coordinates.x = ( (Tree->body.mass)*(Tree->body.coordinates.x) + (b.mass)*(b.coordinates.x) )/(b.mass +Tree->body.mass);
-			Tree->body.coordinates.y = ( (Tree->body.mass)*(Tree->body.coordinates.y) + (b.mass)*(b.coordinates.y) )/(b.mass + Tree->body.mass);
-			Tree->body.mass =  Tree->body.mass + b.mass;
-			Tree->number_of_bodies = Tree->number_of_bodies + 1 ;
-
+			/* updating the mass and the position of COM for the invoking node/parent node */
+			body.add(b); /* Centre of Mass information updated */
+			NumberOfBodies++ ;
+			
 			/* checking in which subquadrant of the invoking quadrant does the body lie */
-			int subquad = Tree->region.which_subquad_contain(b.coordinates); 
+			int SubQuad = Region.GetQuadrant(b.coordinates); 
 
-			if(subquad == 1){
-				return insert(Tree->NW, b);
+			/* inserting body in the child nodes */
+			if(SubQuad == 1){
+				return NW->insert(b);
 			}
-			else if(subquad == 2){
-				return insert(Tree->NE, b);
+			else if(SubQuad == 2){
+				return NE->insert(b);
 			}
-			else if(subquad == 3){
-				return insert(Tree->SW, b);
+			else if(SubQuad == 3){
+				return SW->insert(b);
 			}
 			else{
-				return insert(Tree->SE, b);
+				return SE->insert(b);
 			}
+		}
+		else if (NumberOfBodies == 1){ // EXTERNAL NODE
+
+			int SubQuad = Region.GetQuadrant(body.coordinates);
+			if(SubQuad == 1){
+				NW->insert(body);
+			}
+			else if(SubQuad == 2){
+				NE->insert(body);
+			}
+			else if(SubQuad == 3){
+				SW->insert(body);
+			}
+			else{
+				SE->insert(body);
+			}
+
+			int SubQuad_ = Region.GetQuadrant(b.coordinates);
+			if(SubQuad_ == 1){
+				NW->insert(body);
+			}
+			else if(SubQuad_ == 2){
+				NE->insert(body);
+			}
+			else if(SubQuad_ == 3){
+				SW->insert(body);
+			}
+			else{
+				SE->insert(body);
+			}
+
+			NumberOfBodies++ ;
+			body.add(b); /* updating the COM parameters and mass of the invoking node */
+			return;
 		}
 	}
 
-	void updateForce(BHTree_node* Tree,Body b){
-		/* 
-		Visit each node starting from the root node
-		
-		Check if it is an internal node or external node
-		
-		If internal node and s/d < tolerance value (where s is the dimension of the region representing the node), compute
-		force exerted by this body (stationed at the COM of the group of bodies) on the input body
-		
-		If s/d > tolerance value; recurse for the children nodes
-		
-		If external node is reached; compute the force acting on the input body due to the body represented by this node 
+	void updateForce(Body b){
+		/* ALGORITHM
+		1. If the current node is an external node (and it is not body b), calculate the force exerted by the current node on b, and add this amount to b’s net force.
+		2. Otherwise, calculate the ratio s/d. If s/d < θ, treat this internal node as a single body, and calculate the force it exerts on body b, 
+		   and add this amount to b’s net force.
+		3. Otherwise, run the procedure recursively on each of the current node’s children.
 		*/
 
-		if (Tree->number_of_bodies > 1){
-			/* for internal node */
-			if( (Tree->region.dimension)/(distance(b.coordinates, Tree->body.coordinates)) < 0.5 ){
+		if (NumberOfBodies == 0) return; // EMPTY NODE
+
+		else if (NumberOfBodies == 1){ // EXTERNAL NODE
+			double distance_ = distance(b.coordinates, body.coordinates);
+			b.acceleration[0] +=  G*(body.mass)*(body.coordinates.x - b.coordinates.x)/(distance_*distance_*distance_);
+			b.acceleration[1] +=  G*(body.mass)*(body.coordinates.y - b.coordinates.y)/(distance_*distance_*distance_);
+			return;
+		}
+
+		else if (NumberOfBodies > 1){ // INTERNAL NODE
+			
+			if( (Region.dimension)/(distance(b.coordinates, body.coordinates) ) < 0.5 ){
 				/* update force due to the body at the node */
+				double distance_ = distance(b.coordinates, body.coordinates);
+				b.acceleration[0] +=  G*(body.mass)*(body.coordinates.x - b.coordinates.x)/(distance_*distance_*distance_);
+				b.acceleration[1] +=  G*(body.mass)*(body.coordinates.y - b.coordinates.y)/(distance_*distance_*distance_);
+				return;
 			}
 			else{
 				// recursing on children
-				updateForce(Tree->NW, b);
-				updateForce(Tree->NE, b);
-				updateForce(Tree->SW, b);
-				updateForce(Tree->SE, b);
+				NW->updateForce(b);
+				NE->updateForce(b);
+				SW->updateForce(b);
+				SE->updateForce(b);
 			}
-
 		}
-		else if (Tree->number_of_bodies = 1){ 
-			/* BASE CASE */
-			/* for populated external nodes */
-			
-			//double distance_ = distance(b.coordinates, Tree->body.coordinates);
 
-			/*  DEVELOPER NOTES: 
-				NEED TO DEFINE VELOCITY VECTOR AND ACCELERATION VECTOR FOR EACH BODY WHERE UPDATES CAN BE MADE; NEED TO MODIFY THE
-				BODY STRUCT PERHAPS OR SOME OTHER
-			 */
-			
-		}
 	}
-
 };
 
 int main(){
+	/*
+ 	For each step of the simulation, create a new Barnes-Hut tree from scratch, and insert all of the bodies.
+ 	Since the Barnes-Hut tree represents a finite region in the plane, only insert those bodies that are inside the boundaries. 
+ 	After inserting all of the bodies, reset the net forces acting on each body and call updateForce for each body to re-calculate them. 
+ 	Then, update the positions of the bodies and plot them using Turtle graphics.
+	*/
+	double timestep;
+	double duration;
+	cin>>timestep>>duration;
+
+	int h = duration/timestep; // number of iterations
+
+	//create a seperate insert file but for now; create an array of bodies
 	
+	Body body[100];
+	//initialise the bodies
+
+	for (int i = 0; i < h; i++)
+	{
+		BHTreeNode RootNode(/* initialise this with a suitable bounding box */);
+
+		for (int j = 0; j < 100; j++)
+		{
+			RootNode.insert(body[j]);
+		}
+
+		cout<<"Time = "<<(i+1)*timestep<<" seconds"<<endl;
+
+		for (int j = 0; j < 100; j++)
+		{
+			RootNode.updateForce(body[j]);
+
+			body[j].coordinates.x = body[j].coordinates.x + timestep*body[j].velocity[0] + (1/2)*timestep*timestep*body[j].acceleration[0];
+			body[j].coordinates.y = body[j].coordinates.y + timestep*body[j].velocity[1] + (1/2)*timestep*timestep*body[j].acceleration[1];
+
+			body[j].velocity[0] = body[j].velocity[0] + timestep*body[j].acceleration[0];
+			body[j].velocity[1] = body[j].velocity[1] + timestep*body[j].acceleration[1];
+
+			cout<<"Body "<<j<<" ("<<body[j].coordinates.x<<","<<body[j].coordinates.y<<")"<<endl;
+		}
+		cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
+	}
 }
+
+/* 						     DEVELOPER NOTES 
+1. COMPUTE BOUNDING BOX AROUND ALL THE BODIES
+2. IN updateForce() FUNCTION; 0/0 FORM MIGHT BE ENCOUNTERED; IF THE COM OF A GROUP LIES AT THE BODY'S COORDINATES ; 
+   ALSO ONE BODY CANNOT EXERT A FORCE ON ITSELF 
+*/
