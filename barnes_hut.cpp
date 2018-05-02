@@ -125,6 +125,18 @@ struct Body{
 		acceleration[1] = 0;
 	}
 
+	Body(double m, double x_, double y_, double vx, double vy){
+		mass = m;
+		coordinates.x = x_;
+		coordinates.y = y_;
+
+		velocity.push_back(vx);
+		velocity.push_back(vy);
+
+		acceleration.push_back(0);
+		acceleration.push_back(0);
+	}
+
 	bool in(Quadrant q){
 		/* checks whether the body is in a quadrant or not */
 		return q.contains(coordinates.x, coordinates.y);
@@ -145,9 +157,9 @@ struct Body{
 		return ; 
 	}
 
-	void positionUpdate(){
+	/*void positionUpdate(){
 
-	}
+	}*/
 };
 
 struct BHTreeNode{
@@ -318,7 +330,7 @@ int main(){
 	Body body[100];
 	//initialise the bodies
 
-	for (int i = 0; i < h; i++)
+	for (int i = 0; i < h; i++) 
 	{
 		BHTreeNode RootNode(/* initialise this with a suitable bounding box */);
 
