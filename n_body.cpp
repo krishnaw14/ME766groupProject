@@ -3,15 +3,15 @@
 #include <math.h>
 #include <vector>
 #include <string> 
-#include <fstream> //enables export to csv files
-//#include"twobodystruct.h"
+#include <fstream> 
 
 using namespace std;
 
 const double G = 0.00066741;  //True value of .0000000000667408 rounded off to 15 decimal places (precision of double)
 const long long int M1 = 1000; //for present analysis
 const long long int M2 = 2000; //for present analysis
-const double timestep = 0.05; // small time step in seconds
+const double timestep = 0.005; // small time step in seconds
+
 
 struct Body
 { 
@@ -68,7 +68,6 @@ struct Body
 		cout<<"x = "<<r[0]<<" y = "<<r[1]<<endl;
 	}
 
-=======
 	/*
 	void operator()(double mass, double x, double y, double vel_x, double vel_y){
 		M = mass;
@@ -82,23 +81,20 @@ struct Body
 
 int main()
 {
-	int n=5;
+	int n=128;
 	vector<Body> body_array;
-	//Body body_array[n]; //Array of bodies. Aim is to determine the trajectories of each body stored in body_array
 
-	//Initialize position, velocity and mass of each body
+	ifstream dataset;
+	double m,x,y,z, vx,vy,vz;
 
-	Body body1(1*M1, 0, 0, 100, 0);
-	Body body2(2*M1,5, 0, -100, 0);
-	Body body3(3*M1, 10, 0, 200, 50);
-	Body body4(4*M1, 15, 0, 300, -350);
-	Body body5(5*M1, 20, 0, 400, 800);
+	dataset.open("tab65536.txt");
 
-	body_array.push_back(body1);
-	body_array.push_back(body2);
-	body_array.push_back(body3);
-	body_array.push_back(body4);
-	body_array.push_back(body5);
+	while(dataset)
+	{
+		dataset >> m >> x >> y >> z >> vx >> vy >> vz ;
+		Body newBody(m, x, y, vx, vy);
+		body_array.push_back(newBody);
+	}
 
 	for (int i=0;i<n;i++)
 		body_array[i].acceleration_update(body_array, n); //sets up initial accelerations of the bodies
@@ -110,8 +106,8 @@ int main()
 
 	for (int i=0;i<n;i++)
 	{
-		cout<<"Body"+to_string(i);
-		body_array[i].print_r();
+		//cout<<"Body"+to_string(i);
+		//body_array[i].print_r();
 	}
 
 	for(int i=1; i<h; i++)
@@ -122,8 +118,8 @@ int main()
 			body_array[j].r_update();
 			body_array[j].v_update(body_array, n);
 
-			cout<<"Body "+to_string(j);
-		    body_array[j].print_r();
+			//cout<<"Body "+to_string(j);
+		    //body_array[j].print_r();
 		}
 
 	}
