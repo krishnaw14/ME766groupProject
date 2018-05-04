@@ -4,13 +4,12 @@
 #include <vector>
 #include <string> 
 #include <fstream> 
+#include <ctime>
 
 using namespace std;
 
 const double G = 0.00066741;  //True value of .0000000000667408 rounded off to 15 decimal places (precision of double)
-const long long int M1 = 1000; //for present analysis
-const long long int M2 = 2000; //for present analysis
-const double timestep = 0.005; // small time step in seconds
+const double timestep = 0.05; // small time step in seconds
 
 
 struct Body
@@ -68,26 +67,17 @@ struct Body
 		cout<<"x = "<<r[0]<<" y = "<<r[1]<<endl;
 	}
 
-	/*
-	void operator()(double mass, double x, double y, double vel_x, double vel_y){
-		M = mass;
-		r[0] = x;
-		r[1] = y;
-		v[0] = vel_x;
-		v[1] = vel_y;
-		return;
-	}*/
 };
 
-int main()
+int main(int argc, char ** argv)
 {
-	int n=128;
+	int n=8096;
 	vector<Body> body_array;
 
 	ifstream dataset;
 	double m,x,y,z, vx,vy,vz;
 
-	dataset.open("tab65536.txt");
+	dataset.open("tab8096.txt");
 
 	while(dataset)
 	{
@@ -104,13 +94,17 @@ int main()
 
 	int h = duration/timestep; // h =number of iterations
 
-	for (int i=0;i<n;i++)
-	{
-		//cout<<"Body"+to_string(i);
-		//body_array[i].print_r();
-	}
+	clock_t time1, time2;
+	double total_time;
+	time1=clock();
 
-	for(int i=1; i<h; i++)
+	/*for (int i=0;i<n;i++)
+	{
+		cout<<"Body"+to_string(i);
+		body_array[i].print_r();
+	}*/
+
+	for(int i=1; i<=h; i++)
 	{
 
 		for(int j=0;j<n;j++)
@@ -123,5 +117,15 @@ int main()
 		}
 
 	}
+
+	time2 = clock();
+
+	total_time =(double)(time2-time1)/(CLOCKS_PER_SEC);
+	cout<<"Total Time = "<<total_time;
+	/*for (int i=0;i<n;i++)
+	{
+		cout<<"Body"+to_string(i);
+		body_array[i].print_r();
+	}*/
 
 }
