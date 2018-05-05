@@ -1,6 +1,7 @@
-#include<iostream>
-#include<math.h>
-#include<vector>
+#include <iostream>
+#include <math.h>
+#include <vector>
+#include <fstream>
 using namespace std;
 
 const double G = 1; // change later; use symbolically for now
@@ -172,24 +173,24 @@ struct Body{
 struct BHTreeNode{
 	Body body;
 	Quadrant Region;
-	BHTreeNode NW ; // four sub-trees/sub-regions; children nodes
-	BHTreeNode NE ;
-	BHTreeNode SW ;
-	BHTreeNode SE ;
+	BHTreeNode* NW ; // four sub-trees/sub-regions; children nodes
+	BHTreeNode* NE ;
+	BHTreeNode* SW ;
+	BHTreeNode* SE ;
 	int NumberOfBodies; 
 
 	BHTreeNode(){
 		/* default constructor */
 		NumberOfBodies = 0;
-		NW.NumberOfBodies = 0;
-		NE.NumberOfBodies = 0;
-		SW.NumberOfBodies = 0;
-		SE.NumberOfBodies = 0;
+		NW->NumberOfBodies = 0;
+		NE->NumberOfBodies = 0;
+		SW->NumberOfBodies = 0;
+		SE->NumberOfBodies = 0;
 		
-		NW.Region = *( Region.NW() );
-		NE.Region = *( Region.NE() );
-		SW.Region = *( Region.SW() );
-		SE.Region = *( Region.SE() );
+		NW->Region = *( Region.NW() );
+		NE->Region = *( Region.NE() );
+		SW->Region = *( Region.SW() );
+		SE->Region = *( Region.SE() );
 	}
 
 	BHTreeNode(Quadrant Q){
@@ -197,10 +198,10 @@ struct BHTreeNode{
 		Region = Q;
 		/* initialising */
 		NumberOfBodies = 0;
-		NW.Region = *( Region.NW() );
-		NE.Region = *( Region.NE() );
-		SW.Region = *( Region.SW() );
-		SE.Region = *( Region.SE() );
+		NW->Region = *( Region.NW() );
+		NE->Region = *( Region.NE() );
+		SW->Region = *( Region.SW() );
+		SE->Region = *( Region.SE() );
 
 		// 'body' member variable is already initialised because of Body's default constructor
 	}
@@ -233,16 +234,16 @@ struct BHTreeNode{
 
 			/* inserting body in the child nodes */
 			if(SubQuad == 1){
-				return NW.insert(b);
+				return NW->insert(b);
 			}
 			else if(SubQuad == 2){
-				return NE.insert(b);
+				return NE->insert(b);
 			}
 			else if(SubQuad == 3){
-				return SW.insert(b);
+				return SW->insert(b);
 			}
 			else{
-				return SE.insert(b);
+				return SE->insert(b);
 			}
 		}
 		else if (NumberOfBodies == 1){ // EXTERNAL NODE
@@ -250,30 +251,30 @@ struct BHTreeNode{
 
 			int SubQuad = Region.GetQuadrant(body.coordinates);
 			if(SubQuad == 1){
-				NW.insert(body);
+				NW->insert(body);
 			}
 			else if(SubQuad == 2){
-				NE.insert(body);
+				NE->insert(body);
 			}
 			else if(SubQuad == 3){
-				SW.insert(body);
+				SW->insert(body);
 			}
 			else{
-				SE.insert(body);
+				SE->insert(body);
 			}
 
 			int SubQuad_ = Region.GetQuadrant(b.coordinates);
 			if(SubQuad_ == 1){
-				NW.insert(body);
+				NW->insert(body);
 			}
 			else if(SubQuad_ == 2){
-				NE.insert(body);
+				NE->insert(body);
 			}
 			else if(SubQuad_ == 3){
-				SW.insert(body);
+				SW->insert(body);
 			}
 			else{
-				SE. insert(body);
+				SE->insert(body);
 			}
 
 			NumberOfBodies++ ;
@@ -310,13 +311,21 @@ struct BHTreeNode{
 			}
 			else{
 				// recursing on children
-				NW.updateForce(b);
-				NE.updateForce(b);
-				SW.updateForce(b);
-				SE.updateForce(b);
+				NW->updateForce(b);
+				NE->updateForce(b);
+				SW->updateForce(b);
+				SE->updateForce(b);
 			}
 		}
 
+	}
+
+	/* WRITING A DESTRUCTOR FOR THE BHTreeNode DATATYPE */
+	~BHTreeNode(){
+		delete NW;
+		delete NE;
+		delete SW;
+		delete SE;
 	}
 };
 
@@ -327,16 +336,22 @@ int main(){
  	After inserting all of the bodies, reset the net forces acting on each body and call updateForce for each body to re-calculate them. 
  	Then, update the positions of the bodies and plot them using Turtle graphics.
 	*/
-	double timestep;
-	double duration;
-	cin>>timestep>>duration;
+	double timestep=0.01;
+	double duration=0.1;
 
 	int numberOfIterations = duration/timestep; // number of iterations
 	int n = 128;
+	cout<<numberOfIterations<<endl;;
 
 	std::vector<Body> Bodies; 
 	//initialise the bodies
-	ifstream dataset;
+	
+	Body body1(0.0078125,-0.561583,-0.0653953,-0.106656,-0.119243);
+	Body body2(0.0078125,4.85715,-0.32989,0.388497,0.20792);
+
+	Bodies.push_back(body1);
+	Bodies.push_back(body2);
+	/*ifstream dataset;
 	double m,x,y,z, vx,vy,vz;
 	
 	dataset.open("tab128.txt");
@@ -346,35 +361,34 @@ int main(){
 		dataset >> m >> x >> y >> z >> vx >> vy >> vz ;
 		Body newBody(m, x, y, vx, vy);
 		Bodies.push_back(newBody);
+	} */
+
+	for(int j=0; j<2; j++){
+		cout<<Bodies[j].mass<<" "<<Bodies[j].coordinates.x<<" "<<Bodies[j].coordinates.y<<endl;
 	}
 
-	for (int i = 0; i < numberOfIterations; i++) 
-	{
-		Quadrant boundingBox(-5,-5,10);
-		BHTreeNode RootNode(boundingBox);
-
-		for (int j = 0; j < n; j++)
-		{
-			RootNode.insert(Bodies[j]);
+	for(int i=0; i<numberOfIterations; i++){
+		BHTreeNode* tree = NULL;
+		for(int j=0; j<2; j++){
+			tree->insert(Bodies[j]);
 		}
 
-		cout<<"Time = "<<(i+1)*timestep<<" seconds"<<endl;
+		for(int j=0; j<2; j++){
+			tree->updateForce(Bodies[j]);
+		}
+		// now Bodies[i].acceleration[] is a populated vector
 
-		for (int j = 0; j < n; j++)
-		{
-			RootNode.updateForce(Bodies[j]);
-
+		//writing code to update positions
+		for(int j=0; j<2; j++){
 			Bodies[j].coordinates.x = Bodies[j].coordinates.x + timestep*Bodies[j].velocity[0] + (1/2)*timestep*timestep*Bodies[j].acceleration[0];
 			Bodies[j].coordinates.y = Bodies[j].coordinates.y + timestep*Bodies[j].velocity[1] + (1/2)*timestep*timestep*Bodies[j].acceleration[1];
 
 			Bodies[j].velocity[0] = Bodies[j].velocity[0] + timestep*Bodies[j].acceleration[0];
 			Bodies[j].velocity[1] = Bodies[j].velocity[1] + timestep*Bodies[j].acceleration[1];
-
-			cout<<"Body "<<j<<" ("<<Bodies[j].coordinates.x<<","<<Bodies[j].coordinates.y<<")"<<endl;
 		}
-		cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
+		delete tree;
 	}
-}
+} 
 
 /* 																			DEVELOPER NOTES 
 1. COMPUTE BOUNDING BOX AROUND ALL THE BODIES
