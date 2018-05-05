@@ -23,7 +23,8 @@ struct Body
 		r[0]=0; r[1]=0;
 		v[0]=0; v[1]=0;
 	}
-	Body(double mass, double x, double y, double vel_x, double vel_y){ //constructor
+	Body(double mass, double x, double y, double vel_x, double vel_y)
+	{ //constructor
 		M = mass;
 		r[0] = x;
 		r[1] = y;
@@ -31,7 +32,7 @@ struct Body
 		v[1] = vel_y;
 	}
 	
-	void acceleration_update( vector<Body> body_array, int n)
+	void acceleration_update( vector<Body> &body_array, int n)
 	{
 		for (int i=0;i<n;i++)
 		{
@@ -52,7 +53,7 @@ struct Body
 		r[1] = r[1] + v[1]*timestep + (1.0/2)*a[1]*timestep*timestep ;
 	}
 
-	void v_update(vector<Body> body_array, int n){
+	void v_update(vector<Body> &body_array, int n){
 		v[0] = v[0] + (1.0/2)*a[0]*timestep;
 		v[1] = v[1] + (1.0/2)*a[1]*timestep;
 
@@ -71,13 +72,13 @@ struct Body
 
 int main(int argc, char ** argv)
 {
-	int n=8096;
+	int n=128;
 	vector<Body> body_array;
 
 	ifstream dataset;
 	double m,x,y,z, vx,vy,vz;
 
-	dataset.open("tab8096.txt");
+	dataset.open("tab128.txt");
 
 	while(dataset)
 	{
@@ -115,13 +116,14 @@ int main(int argc, char ** argv)
 			//cout<<"Body "+to_string(j);
 		    //body_array[j].print_r();
 		}
+		//body_array[0].print_r();
 
 	}
 
 	time2 = clock();
 
 	total_time =(double)(time2-time1)/(CLOCKS_PER_SEC);
-	cout<<"Total Time = "<<total_time;
+	cout<<"Total Time = "<<total_time<<endl;
 	/*for (int i=0;i<n;i++)
 	{
 		cout<<"Body"+to_string(i);
