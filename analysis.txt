@@ -1,0 +1,522 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+100.10      0.02     0.02    12928     1.55     1.55  acceleration_update(std::vector<Body, std::allocator<Body> >&, int, int)
+  0.00      0.02     0.00 14956132     0.00     0.00  std::vector<Body, std::allocator<Body> >::operator[](unsigned long)
+  0.00      0.02     0.00    25600     0.00     0.00  r_update(Body&)
+  0.00      0.02     0.00    12800     0.00     1.55  v_update(std::vector<Body, std::allocator<Body> >&, int, int)
+  0.00      0.02     0.00      528     0.00     0.00  std::move_iterator<Body*>::base() const
+  0.00      0.02     0.00      384     0.00     0.00  operator new(unsigned long, void*)
+  0.00      0.02     0.00      267     0.00     0.00  Body const& std::forward<Body const&>(std::remove_reference<Body const&>::type&)
+  0.00      0.02     0.00      264     0.00     0.00  bool std::operator==<Body*>(std::move_iterator<Body*> const&, std::move_iterator<Body*> const&)
+  0.00      0.02     0.00      264     0.00     0.00  bool std::operator!=<Body*>(std::move_iterator<Body*> const&, std::move_iterator<Body*> const&)
+  0.00      0.02     0.00      255     0.00     0.00  std::move_iterator<Body*>::operator*() const
+  0.00      0.02     0.00      255     0.00     0.00  std::move_iterator<Body*>::operator++()
+  0.00      0.02     0.00      255     0.00     0.00  void std::_Construct<Body, Body>(Body*, Body&&)
+  0.00      0.02     0.00      255     0.00     0.00  Body* std::__addressof<Body>(Body&)
+  0.00      0.02     0.00      255     0.00     0.00  Body&& std::forward<Body>(std::remove_reference<Body>::type&)
+  0.00      0.02     0.00      228     0.00     0.00  Body::print_r()
+  0.00      0.02     0.00      129     0.00     0.00  Body::Body(double, double, double, double, double)
+  0.00      0.02     0.00      129     0.00     0.00  _ZN9__gnu_cxx13new_allocatorI4BodyE9constructIS1_IRKS1_EEEvPT_DpOT0_
+  0.00      0.02     0.00      129     0.00     0.00  _ZNSt16allocator_traitsISaI4BodyEE9constructIS0_IRKS0_EEEvRS1_PT_DpOT0_
+  0.00      0.02     0.00      129     0.00     0.00  std::vector<Body, std::allocator<Body> >::push_back(Body const&)
+  0.00      0.02     0.00      128     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...)
+  0.00      0.02     0.00      128     0.00     0.00  bool __gnu_cxx::__is_null_pointer<char>(char*)
+  0.00      0.02     0.00      128     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*)
+  0.00      0.02     0.00      128     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
+  0.00      0.02     0.00      128     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)
+  0.00      0.02     0.00      128     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
+  0.00      0.02     0.00      128     0.00     0.00  std::__cxx11::to_string(int)
+  0.00      0.02     0.00      128     0.00     0.00  std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag)
+  0.00      0.02     0.00      128     0.00     0.00  std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&)
+  0.00      0.02     0.00      128     0.00     0.00  std::remove_reference<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>::type&& std::move<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+  0.00      0.02     0.00      128     0.00     0.00  std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*)
+  0.00      0.02     0.00      128     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+  0.00      0.02     0.00       45     0.00     0.00  std::vector<Body, std::allocator<Body> >::size() const
+  0.00      0.02     0.00       27     0.00     0.00  __gnu_cxx::new_allocator<Body>::max_size() const
+  0.00      0.02     0.00       19     0.00     0.00  std::_Vector_base<Body, std::allocator<Body> >::_M_get_Tp_allocator()
+  0.00      0.02     0.00       18     0.00     0.00  std::_Vector_base<Body, std::allocator<Body> >::_M_get_Tp_allocator() const
+  0.00      0.02     0.00       18     0.00     0.00  std::vector<Body, std::allocator<Body> >::max_size() const
+  0.00      0.02     0.00       18     0.00     0.00  std::move_iterator<Body*>::move_iterator(Body*)
+  0.00      0.02     0.00       18     0.00     0.00  std::allocator_traits<std::allocator<Body> >::max_size(std::allocator<Body> const&)
+  0.00      0.02     0.00       18     0.00     0.00  std::move_iterator<Body*> std::__make_move_if_noexcept_iterator<Body*, std::move_iterator<Body*> >(Body*)
+  0.00      0.02     0.00       10     0.00     0.00  void std::_Destroy_aux<true>::__destroy<Body*>(Body*, Body*)
+  0.00      0.02     0.00       10     0.00     0.00  std::_Vector_base<Body, std::allocator<Body> >::_M_deallocate(Body*, unsigned long)
+  0.00      0.02     0.00       10     0.00     0.00  void std::_Destroy<Body*>(Body*, Body*)
+  0.00      0.02     0.00       10     0.00     0.00  void std::_Destroy<Body*, Body>(Body*, Body*, std::allocator<Body>&)
+  0.00      0.02     0.00        9     0.00     0.00  __gnu_cxx::new_allocator<Body>::deallocate(Body*, unsigned long)
+  0.00      0.02     0.00        9     0.00     0.00  __gnu_cxx::new_allocator<Body>::allocate(unsigned long, void const*)
+  0.00      0.02     0.00        9     0.00     0.00  std::vector<Body, std::allocator<Body> >::_M_check_len(unsigned long, char const*) const
+  0.00      0.02     0.00        9     0.00     0.00  std::_Vector_base<Body, std::allocator<Body> >::_M_allocate(unsigned long)
+  0.00      0.02     0.00        9     0.00     0.00  std::allocator_traits<std::allocator<Body> >::deallocate(std::allocator<Body>&, Body*, unsigned long)
+  0.00      0.02     0.00        9     0.00     0.00  std::allocator_traits<std::allocator<Body> >::allocate(std::allocator<Body>&, unsigned long)
+  0.00      0.02     0.00        9     0.00     0.00  Body* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*)
+  0.00      0.02     0.00        9     0.00     0.00  void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&)
+  0.00      0.02     0.00        9     0.00     0.00  Body* std::uninitialized_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*)
+  0.00      0.02     0.00        9     0.00     0.00  Body* std::__uninitialized_copy_a<std::move_iterator<Body*>, Body*, Body>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*, std::allocator<Body>&)
+  0.00      0.02     0.00        9     0.00     0.00  Body* std::__uninitialized_move_if_noexcept_a<Body*, Body*, std::allocator<Body> >(Body*, Body*, Body*, std::allocator<Body>&)
+  0.00      0.02     0.00        9     0.00     0.00  unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&)
+  0.00      0.02     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z8r_updateR4Body
+  0.00      0.02     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.02     0.00        1     0.00     0.00  __gnu_cxx::new_allocator<Body>::new_allocator()
+  0.00      0.02     0.00        1     0.00     0.00  __gnu_cxx::new_allocator<Body>::~new_allocator()
+  0.00      0.02     0.00        1     0.00     0.00  std::allocator<Body>::allocator()
+  0.00      0.02     0.00        1     0.00     0.00  std::allocator<Body>::~allocator()
+  0.00      0.02     0.00        1     0.00     0.00  std::_Vector_base<Body, std::allocator<Body> >::_Vector_impl::_Vector_impl()
+  0.00      0.02     0.00        1     0.00     0.00  std::_Vector_base<Body, std::allocator<Body> >::_Vector_impl::~_Vector_impl()
+  0.00      0.02     0.00        1     0.00     0.00  std::_Vector_base<Body, std::allocator<Body> >::_Vector_base()
+  0.00      0.02     0.00        1     0.00     0.00  std::_Vector_base<Body, std::allocator<Body> >::~_Vector_base()
+  0.00      0.02     0.00        1     0.00     0.00  std::vector<Body, std::allocator<Body> >::vector()
+  0.00      0.02     0.00        1     0.00     0.00  std::vector<Body, std::allocator<Body> >::~vector()
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2015 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 49.95% of 0.02 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.00    0.02                 main [1]
+                0.00    0.02   12800/12800       v_update(std::vector<Body, std::allocator<Body> >&, int, int) [3]
+                0.00    0.00     128/12928       acceleration_update(std::vector<Body, std::allocator<Body> >&, int, int) [2]
+                0.00    0.00   13028/14956132     std::vector<Body, std::allocator<Body> >::operator[](unsigned long) [10]
+                0.00    0.00   12800/25600       r_update(Body&) [11]
+                0.00    0.00     228/228         Body::print_r() [22]
+                0.00    0.00     129/129         Body::Body(double, double, double, double, double) [23]
+                0.00    0.00     129/129         std::vector<Body, std::allocator<Body> >::push_back(Body const&) [26]
+                0.00    0.00     128/128         std::__cxx11::to_string(int) [33]
+                0.00    0.00     128/128         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [38]
+                0.00    0.00       1/1           std::vector<Body, std::allocator<Body> >::vector() [73]
+                0.00    0.00       1/1           std::vector<Body, std::allocator<Body> >::~vector() [74]
+-----------------------------------------------
+                0.00    0.00     128/12928       main [1]
+                0.02    0.00   12800/12928       v_update(std::vector<Body, std::allocator<Body> >&, int, int) [3]
+[2]    100.0    0.02    0.00   12928         acceleration_update(std::vector<Body, std::allocator<Body> >&, int, int) [2]
+                0.00    0.00 14776704/14956132     std::vector<Body, std::allocator<Body> >::operator[](unsigned long) [10]
+-----------------------------------------------
+                0.00    0.02   12800/12800       main [1]
+[3]     99.0    0.00    0.02   12800         v_update(std::vector<Body, std::allocator<Body> >&, int, int) [3]
+                0.02    0.00   12800/12928       acceleration_update(std::vector<Body, std::allocator<Body> >&, int, int) [2]
+                0.00    0.00  166400/14956132     std::vector<Body, std::allocator<Body> >::operator[](unsigned long) [10]
+                0.00    0.00   12800/25600       r_update(Body&) [11]
+-----------------------------------------------
+                0.00    0.00   13028/14956132     main [1]
+                0.00    0.00  166400/14956132     v_update(std::vector<Body, std::allocator<Body> >&, int, int) [3]
+                0.00    0.00 14776704/14956132     acceleration_update(std::vector<Body, std::allocator<Body> >&, int, int) [2]
+[10]     0.0    0.00    0.00 14956132         std::vector<Body, std::allocator<Body> >::operator[](unsigned long) [10]
+-----------------------------------------------
+                0.00    0.00   12800/25600       v_update(std::vector<Body, std::allocator<Body> >&, int, int) [3]
+                0.00    0.00   12800/25600       main [1]
+[11]     0.0    0.00    0.00   25600         r_update(Body&) [11]
+-----------------------------------------------
+                0.00    0.00     528/528         bool std::operator==<Body*>(std::move_iterator<Body*> const&, std::move_iterator<Body*> const&) [15]
+[12]     0.0    0.00    0.00     528         std::move_iterator<Body*>::base() const [12]
+-----------------------------------------------
+                0.00    0.00     129/384         _ZN9__gnu_cxx13new_allocatorI4BodyE9constructIS1_IRKS1_EEEvPT_DpOT0_ [24]
+                0.00    0.00     255/384         void std::_Construct<Body, Body>(Body*, Body&&) [19]
+[13]     0.0    0.00    0.00     384         operator new(unsigned long, void*) [13]
+-----------------------------------------------
+                0.00    0.00       9/267         void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [58]
+                0.00    0.00     129/267         _ZNSt16allocator_traitsISaI4BodyEE9constructIS0_IRKS0_EEEvRS1_PT_DpOT0_ [25]
+                0.00    0.00     129/267         _ZN9__gnu_cxx13new_allocatorI4BodyE9constructIS1_IRKS1_EEEvPT_DpOT0_ [24]
+[14]     0.0    0.00    0.00     267         Body const& std::forward<Body const&>(std::remove_reference<Body const&>::type&) [14]
+-----------------------------------------------
+                0.00    0.00     264/264         bool std::operator!=<Body*>(std::move_iterator<Body*> const&, std::move_iterator<Body*> const&) [16]
+[15]     0.0    0.00    0.00     264         bool std::operator==<Body*>(std::move_iterator<Body*> const&, std::move_iterator<Body*> const&) [15]
+                0.00    0.00     528/528         std::move_iterator<Body*>::base() const [12]
+-----------------------------------------------
+                0.00    0.00     264/264         Body* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*) [57]
+[16]     0.0    0.00    0.00     264         bool std::operator!=<Body*>(std::move_iterator<Body*> const&, std::move_iterator<Body*> const&) [16]
+                0.00    0.00     264/264         bool std::operator==<Body*>(std::move_iterator<Body*> const&, std::move_iterator<Body*> const&) [15]
+-----------------------------------------------
+                0.00    0.00     255/255         Body* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*) [57]
+[17]     0.0    0.00    0.00     255         std::move_iterator<Body*>::operator*() const [17]
+-----------------------------------------------
+                0.00    0.00     255/255         Body* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*) [57]
+[18]     0.0    0.00    0.00     255         std::move_iterator<Body*>::operator++() [18]
+-----------------------------------------------
+                0.00    0.00     255/255         Body* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*) [57]
+[19]     0.0    0.00    0.00     255         void std::_Construct<Body, Body>(Body*, Body&&) [19]
+                0.00    0.00     255/255         Body&& std::forward<Body>(std::remove_reference<Body>::type&) [21]
+                0.00    0.00     255/384         operator new(unsigned long, void*) [13]
+-----------------------------------------------
+                0.00    0.00     255/255         Body* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*) [57]
+[20]     0.0    0.00    0.00     255         Body* std::__addressof<Body>(Body&) [20]
+-----------------------------------------------
+                0.00    0.00     255/255         void std::_Construct<Body, Body>(Body*, Body&&) [19]
+[21]     0.0    0.00    0.00     255         Body&& std::forward<Body>(std::remove_reference<Body>::type&) [21]
+-----------------------------------------------
+                0.00    0.00     228/228         main [1]
+[22]     0.0    0.00    0.00     228         Body::print_r() [22]
+-----------------------------------------------
+                0.00    0.00     129/129         main [1]
+[23]     0.0    0.00    0.00     129         Body::Body(double, double, double, double, double) [23]
+-----------------------------------------------
+                0.00    0.00     129/129         _ZNSt16allocator_traitsISaI4BodyEE9constructIS0_IRKS0_EEEvRS1_PT_DpOT0_ [25]
+[24]     0.0    0.00    0.00     129         _ZN9__gnu_cxx13new_allocatorI4BodyE9constructIS1_IRKS1_EEEvPT_DpOT0_ [24]
+                0.00    0.00     129/267         Body const& std::forward<Body const&>(std::remove_reference<Body const&>::type&) [14]
+                0.00    0.00     129/384         operator new(unsigned long, void*) [13]
+-----------------------------------------------
+                0.00    0.00       9/129         void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [58]
+                0.00    0.00     120/129         std::vector<Body, std::allocator<Body> >::push_back(Body const&) [26]
+[25]     0.0    0.00    0.00     129         _ZNSt16allocator_traitsISaI4BodyEE9constructIS0_IRKS0_EEEvRS1_PT_DpOT0_ [25]
+                0.00    0.00     129/267         Body const& std::forward<Body const&>(std::remove_reference<Body const&>::type&) [14]
+                0.00    0.00     129/129         _ZN9__gnu_cxx13new_allocatorI4BodyE9constructIS1_IRKS1_EEEvPT_DpOT0_ [24]
+-----------------------------------------------
+                0.00    0.00     129/129         main [1]
+[26]     0.0    0.00    0.00     129         std::vector<Body, std::allocator<Body> >::push_back(Body const&) [26]
+                0.00    0.00     120/129         _ZNSt16allocator_traitsISaI4BodyEE9constructIS0_IRKS0_EEEvRS1_PT_DpOT0_ [25]
+                0.00    0.00       9/9           void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [58]
+-----------------------------------------------
+                0.00    0.00     128/128         std::__cxx11::to_string(int) [33]
+[27]     0.0    0.00    0.00     128         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [27]
+                0.00    0.00     128/128         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [32]
+-----------------------------------------------
+                0.00    0.00     128/128         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [30]
+[28]     0.0    0.00    0.00     128         bool __gnu_cxx::__is_null_pointer<char>(char*) [28]
+-----------------------------------------------
+                0.00    0.00     128/128         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [32]
+[29]     0.0    0.00    0.00     128         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [29]
+                0.00    0.00     128/128         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [31]
+-----------------------------------------------
+                0.00    0.00     128/128         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [31]
+[30]     0.0    0.00    0.00     128         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [30]
+                0.00    0.00     128/128         bool __gnu_cxx::__is_null_pointer<char>(char*) [28]
+                0.00    0.00     128/128         std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [37]
+-----------------------------------------------
+                0.00    0.00     128/128         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [29]
+[31]     0.0    0.00    0.00     128         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [31]
+                0.00    0.00     128/128         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [30]
+-----------------------------------------------
+                0.00    0.00     128/128         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [27]
+[32]     0.0    0.00    0.00     128         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [32]
+                0.00    0.00     128/128         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [29]
+-----------------------------------------------
+                0.00    0.00     128/128         main [1]
+[33]     0.0    0.00    0.00     128         std::__cxx11::to_string(int) [33]
+                0.00    0.00     128/128         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [27]
+-----------------------------------------------
+                0.00    0.00     128/128         std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [37]
+[34]     0.0    0.00    0.00     128         std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag) [34]
+-----------------------------------------------
+                0.00    0.00     128/128         std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [37]
+[35]     0.0    0.00    0.00     128         std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&) [35]
+-----------------------------------------------
+                0.00    0.00     128/128         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [38]
+[36]     0.0    0.00    0.00     128         std::remove_reference<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>::type&& std::move<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) [36]
+-----------------------------------------------
+                0.00    0.00     128/128         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [30]
+[37]     0.0    0.00    0.00     128         std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [37]
+                0.00    0.00     128/128         std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&) [35]
+                0.00    0.00     128/128         std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag) [34]
+-----------------------------------------------
+                0.00    0.00     128/128         main [1]
+[38]     0.0    0.00    0.00     128         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [38]
+                0.00    0.00     128/128         std::remove_reference<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>::type&& std::move<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) [36]
+-----------------------------------------------
+                0.00    0.00       9/45          void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [58]
+                0.00    0.00      36/45          std::vector<Body, std::allocator<Body> >::_M_check_len(unsigned long, char const*) const [53]
+[39]     0.0    0.00    0.00      45         std::vector<Body, std::allocator<Body> >::size() const [39]
+-----------------------------------------------
+                0.00    0.00       9/27          __gnu_cxx::new_allocator<Body>::allocate(unsigned long, void const*) [52]
+                0.00    0.00      18/27          std::allocator_traits<std::allocator<Body> >::max_size(std::allocator<Body> const&) [45]
+[40]     0.0    0.00    0.00      27         __gnu_cxx::new_allocator<Body>::max_size() const [40]
+-----------------------------------------------
+                0.00    0.00       1/19          std::vector<Body, std::allocator<Body> >::~vector() [74]
+                0.00    0.00      18/19          void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [58]
+[41]     0.0    0.00    0.00      19         std::_Vector_base<Body, std::allocator<Body> >::_M_get_Tp_allocator() [41]
+-----------------------------------------------
+                0.00    0.00      18/18          std::vector<Body, std::allocator<Body> >::max_size() const [43]
+[42]     0.0    0.00    0.00      18         std::_Vector_base<Body, std::allocator<Body> >::_M_get_Tp_allocator() const [42]
+-----------------------------------------------
+                0.00    0.00      18/18          std::vector<Body, std::allocator<Body> >::_M_check_len(unsigned long, char const*) const [53]
+[43]     0.0    0.00    0.00      18         std::vector<Body, std::allocator<Body> >::max_size() const [43]
+                0.00    0.00      18/18          std::allocator_traits<std::allocator<Body> >::max_size(std::allocator<Body> const&) [45]
+                0.00    0.00      18/18          std::_Vector_base<Body, std::allocator<Body> >::_M_get_Tp_allocator() const [42]
+-----------------------------------------------
+                0.00    0.00      18/18          std::move_iterator<Body*> std::__make_move_if_noexcept_iterator<Body*, std::move_iterator<Body*> >(Body*) [46]
+[44]     0.0    0.00    0.00      18         std::move_iterator<Body*>::move_iterator(Body*) [44]
+-----------------------------------------------
+                0.00    0.00      18/18          std::vector<Body, std::allocator<Body> >::max_size() const [43]
+[45]     0.0    0.00    0.00      18         std::allocator_traits<std::allocator<Body> >::max_size(std::allocator<Body> const&) [45]
+                0.00    0.00      18/27          __gnu_cxx::new_allocator<Body>::max_size() const [40]
+-----------------------------------------------
+                0.00    0.00      18/18          Body* std::__uninitialized_move_if_noexcept_a<Body*, Body*, std::allocator<Body> >(Body*, Body*, Body*, std::allocator<Body>&) [61]
+[46]     0.0    0.00    0.00      18         std::move_iterator<Body*> std::__make_move_if_noexcept_iterator<Body*, std::move_iterator<Body*> >(Body*) [46]
+                0.00    0.00      18/18          std::move_iterator<Body*>::move_iterator(Body*) [44]
+-----------------------------------------------
+                0.00    0.00      10/10          void std::_Destroy<Body*>(Body*, Body*) [49]
+[47]     0.0    0.00    0.00      10         void std::_Destroy_aux<true>::__destroy<Body*>(Body*, Body*) [47]
+-----------------------------------------------
+                0.00    0.00       1/10          std::_Vector_base<Body, std::allocator<Body> >::~_Vector_base() [72]
+                0.00    0.00       9/10          void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [58]
+[48]     0.0    0.00    0.00      10         std::_Vector_base<Body, std::allocator<Body> >::_M_deallocate(Body*, unsigned long) [48]
+                0.00    0.00       9/9           std::allocator_traits<std::allocator<Body> >::deallocate(std::allocator<Body>&, Body*, unsigned long) [55]
+-----------------------------------------------
+                0.00    0.00      10/10          void std::_Destroy<Body*, Body>(Body*, Body*, std::allocator<Body>&) [50]
+[49]     0.0    0.00    0.00      10         void std::_Destroy<Body*>(Body*, Body*) [49]
+                0.00    0.00      10/10          void std::_Destroy_aux<true>::__destroy<Body*>(Body*, Body*) [47]
+-----------------------------------------------
+                0.00    0.00       1/10          std::vector<Body, std::allocator<Body> >::~vector() [74]
+                0.00    0.00       9/10          void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [58]
+[50]     0.0    0.00    0.00      10         void std::_Destroy<Body*, Body>(Body*, Body*, std::allocator<Body>&) [50]
+                0.00    0.00      10/10          void std::_Destroy<Body*>(Body*, Body*) [49]
+-----------------------------------------------
+                0.00    0.00       9/9           std::allocator_traits<std::allocator<Body> >::deallocate(std::allocator<Body>&, Body*, unsigned long) [55]
+[51]     0.0    0.00    0.00       9         __gnu_cxx::new_allocator<Body>::deallocate(Body*, unsigned long) [51]
+-----------------------------------------------
+                0.00    0.00       9/9           std::allocator_traits<std::allocator<Body> >::allocate(std::allocator<Body>&, unsigned long) [56]
+[52]     0.0    0.00    0.00       9         __gnu_cxx::new_allocator<Body>::allocate(unsigned long, void const*) [52]
+                0.00    0.00       9/27          __gnu_cxx::new_allocator<Body>::max_size() const [40]
+-----------------------------------------------
+                0.00    0.00       9/9           void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [58]
+[53]     0.0    0.00    0.00       9         std::vector<Body, std::allocator<Body> >::_M_check_len(unsigned long, char const*) const [53]
+                0.00    0.00      36/45          std::vector<Body, std::allocator<Body> >::size() const [39]
+                0.00    0.00      18/18          std::vector<Body, std::allocator<Body> >::max_size() const [43]
+                0.00    0.00       9/9           unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&) [62]
+-----------------------------------------------
+                0.00    0.00       9/9           void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [58]
+[54]     0.0    0.00    0.00       9         std::_Vector_base<Body, std::allocator<Body> >::_M_allocate(unsigned long) [54]
+                0.00    0.00       9/9           std::allocator_traits<std::allocator<Body> >::allocate(std::allocator<Body>&, unsigned long) [56]
+-----------------------------------------------
+                0.00    0.00       9/9           std::_Vector_base<Body, std::allocator<Body> >::_M_deallocate(Body*, unsigned long) [48]
+[55]     0.0    0.00    0.00       9         std::allocator_traits<std::allocator<Body> >::deallocate(std::allocator<Body>&, Body*, unsigned long) [55]
+                0.00    0.00       9/9           __gnu_cxx::new_allocator<Body>::deallocate(Body*, unsigned long) [51]
+-----------------------------------------------
+                0.00    0.00       9/9           std::_Vector_base<Body, std::allocator<Body> >::_M_allocate(unsigned long) [54]
+[56]     0.0    0.00    0.00       9         std::allocator_traits<std::allocator<Body> >::allocate(std::allocator<Body>&, unsigned long) [56]
+                0.00    0.00       9/9           __gnu_cxx::new_allocator<Body>::allocate(unsigned long, void const*) [52]
+-----------------------------------------------
+                0.00    0.00       9/9           Body* std::uninitialized_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*) [59]
+[57]     0.0    0.00    0.00       9         Body* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*) [57]
+                0.00    0.00     264/264         bool std::operator!=<Body*>(std::move_iterator<Body*> const&, std::move_iterator<Body*> const&) [16]
+                0.00    0.00     255/255         std::move_iterator<Body*>::operator*() const [17]
+                0.00    0.00     255/255         void std::_Construct<Body, Body>(Body*, Body&&) [19]
+                0.00    0.00     255/255         Body* std::__addressof<Body>(Body&) [20]
+                0.00    0.00     255/255         std::move_iterator<Body*>::operator++() [18]
+-----------------------------------------------
+                0.00    0.00       9/9           std::vector<Body, std::allocator<Body> >::push_back(Body const&) [26]
+[58]     0.0    0.00    0.00       9         void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [58]
+                0.00    0.00      18/19          std::_Vector_base<Body, std::allocator<Body> >::_M_get_Tp_allocator() [41]
+                0.00    0.00       9/9           std::vector<Body, std::allocator<Body> >::_M_check_len(unsigned long, char const*) const [53]
+                0.00    0.00       9/9           std::_Vector_base<Body, std::allocator<Body> >::_M_allocate(unsigned long) [54]
+                0.00    0.00       9/267         Body const& std::forward<Body const&>(std::remove_reference<Body const&>::type&) [14]
+                0.00    0.00       9/45          std::vector<Body, std::allocator<Body> >::size() const [39]
+                0.00    0.00       9/129         _ZNSt16allocator_traitsISaI4BodyEE9constructIS0_IRKS0_EEEvRS1_PT_DpOT0_ [25]
+                0.00    0.00       9/9           Body* std::__uninitialized_move_if_noexcept_a<Body*, Body*, std::allocator<Body> >(Body*, Body*, Body*, std::allocator<Body>&) [61]
+                0.00    0.00       9/10          void std::_Destroy<Body*, Body>(Body*, Body*, std::allocator<Body>&) [50]
+                0.00    0.00       9/10          std::_Vector_base<Body, std::allocator<Body> >::_M_deallocate(Body*, unsigned long) [48]
+-----------------------------------------------
+                0.00    0.00       9/9           Body* std::__uninitialized_copy_a<std::move_iterator<Body*>, Body*, Body>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*, std::allocator<Body>&) [60]
+[59]     0.0    0.00    0.00       9         Body* std::uninitialized_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*) [59]
+                0.00    0.00       9/9           Body* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*) [57]
+-----------------------------------------------
+                0.00    0.00       9/9           Body* std::__uninitialized_move_if_noexcept_a<Body*, Body*, std::allocator<Body> >(Body*, Body*, Body*, std::allocator<Body>&) [61]
+[60]     0.0    0.00    0.00       9         Body* std::__uninitialized_copy_a<std::move_iterator<Body*>, Body*, Body>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*, std::allocator<Body>&) [60]
+                0.00    0.00       9/9           Body* std::uninitialized_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*) [59]
+-----------------------------------------------
+                0.00    0.00       9/9           void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [58]
+[61]     0.0    0.00    0.00       9         Body* std::__uninitialized_move_if_noexcept_a<Body*, Body*, std::allocator<Body> >(Body*, Body*, Body*, std::allocator<Body>&) [61]
+                0.00    0.00      18/18          std::move_iterator<Body*> std::__make_move_if_noexcept_iterator<Body*, std::move_iterator<Body*> >(Body*) [46]
+                0.00    0.00       9/9           Body* std::__uninitialized_copy_a<std::move_iterator<Body*>, Body*, Body>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*, std::allocator<Body>&) [60]
+-----------------------------------------------
+                0.00    0.00       9/9           std::vector<Body, std::allocator<Body> >::_M_check_len(unsigned long, char const*) const [53]
+[62]     0.0    0.00    0.00       9         unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&) [62]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [83]
+[63]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z8r_updateR4Body [63]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [64]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z8r_updateR4Body [63]
+[64]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [64]
+-----------------------------------------------
+                0.00    0.00       1/1           std::allocator<Body>::allocator() [67]
+[65]     0.0    0.00    0.00       1         __gnu_cxx::new_allocator<Body>::new_allocator() [65]
+-----------------------------------------------
+                0.00    0.00       1/1           std::allocator<Body>::~allocator() [68]
+[66]     0.0    0.00    0.00       1         __gnu_cxx::new_allocator<Body>::~new_allocator() [66]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Vector_base<Body, std::allocator<Body> >::_Vector_impl::_Vector_impl() [69]
+[67]     0.0    0.00    0.00       1         std::allocator<Body>::allocator() [67]
+                0.00    0.00       1/1           __gnu_cxx::new_allocator<Body>::new_allocator() [65]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Vector_base<Body, std::allocator<Body> >::_Vector_impl::~_Vector_impl() [70]
+[68]     0.0    0.00    0.00       1         std::allocator<Body>::~allocator() [68]
+                0.00    0.00       1/1           __gnu_cxx::new_allocator<Body>::~new_allocator() [66]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Vector_base<Body, std::allocator<Body> >::_Vector_base() [71]
+[69]     0.0    0.00    0.00       1         std::_Vector_base<Body, std::allocator<Body> >::_Vector_impl::_Vector_impl() [69]
+                0.00    0.00       1/1           std::allocator<Body>::allocator() [67]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Vector_base<Body, std::allocator<Body> >::~_Vector_base() [72]
+[70]     0.0    0.00    0.00       1         std::_Vector_base<Body, std::allocator<Body> >::_Vector_impl::~_Vector_impl() [70]
+                0.00    0.00       1/1           std::allocator<Body>::~allocator() [68]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<Body, std::allocator<Body> >::vector() [73]
+[71]     0.0    0.00    0.00       1         std::_Vector_base<Body, std::allocator<Body> >::_Vector_base() [71]
+                0.00    0.00       1/1           std::_Vector_base<Body, std::allocator<Body> >::_Vector_impl::_Vector_impl() [69]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<Body, std::allocator<Body> >::~vector() [74]
+[72]     0.0    0.00    0.00       1         std::_Vector_base<Body, std::allocator<Body> >::~_Vector_base() [72]
+                0.00    0.00       1/1           std::_Vector_base<Body, std::allocator<Body> >::_Vector_impl::~_Vector_impl() [70]
+                0.00    0.00       1/10          std::_Vector_base<Body, std::allocator<Body> >::_M_deallocate(Body*, unsigned long) [48]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[73]     0.0    0.00    0.00       1         std::vector<Body, std::allocator<Body> >::vector() [73]
+                0.00    0.00       1/1           std::_Vector_base<Body, std::allocator<Body> >::_Vector_base() [71]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[74]     0.0    0.00    0.00       1         std::vector<Body, std::allocator<Body> >::~vector() [74]
+                0.00    0.00       1/19          std::_Vector_base<Body, std::allocator<Body> >::_M_get_Tp_allocator() [41]
+                0.00    0.00       1/1           std::_Vector_base<Body, std::allocator<Body> >::~_Vector_base() [72]
+                0.00    0.00       1/10          void std::_Destroy<Body*, Body>(Body*, Body*, std::allocator<Body>&) [50]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2015 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [63] _GLOBAL__sub_I__Z8r_updateR4Body [47] void std::_Destroy_aux<true>::__destroy<Body*>(Body*, Body*) [32] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
+   [2] acceleration_update(std::vector<Body, std::allocator<Body> >&, int, int) [54] std::_Vector_base<Body, std::allocator<Body> >::_M_allocate(unsigned long) [33] std::__cxx11::to_string(int)
+  [64] __static_initialization_and_destruction_0(int, int) [69] std::_Vector_base<Body, std::allocator<Body> >::_Vector_impl::_Vector_impl() [19] void std::_Construct<Body, Body>(Body*, Body&&)
+  [11] r_update(Body&)        [70] std::_Vector_base<Body, std::allocator<Body> >::_Vector_impl::~_Vector_impl() [34] std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag)
+   [3] v_update(std::vector<Body, std::allocator<Body> >&, int, int) [48] std::_Vector_base<Body, std::allocator<Body> >::_M_deallocate(Body*, unsigned long) [20] Body* std::__addressof<Body>(Body&)
+  [22] Body::print_r()        [41] std::_Vector_base<Body, std::allocator<Body> >::_M_get_Tp_allocator() [59] Body* std::uninitialized_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*)
+  [23] Body::Body(double, double, double, double, double) [71] std::_Vector_base<Body, std::allocator<Body> >::_Vector_base() [35] std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&)
+  [27] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [72] std::_Vector_base<Body, std::allocator<Body> >::~_Vector_base() [60] Body* std::__uninitialized_copy_a<std::move_iterator<Body*>, Body*, Body>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*, std::allocator<Body>&)
+  [51] __gnu_cxx::new_allocator<Body>::deallocate(Body*, unsigned long) [44] std::move_iterator<Body*>::move_iterator(Body*) [46] std::move_iterator<Body*> std::__make_move_if_noexcept_iterator<Body*, std::move_iterator<Body*> >(Body*)
+  [52] __gnu_cxx::new_allocator<Body>::allocate(unsigned long, void const*) [18] std::move_iterator<Body*>::operator++() [61] Body* std::__uninitialized_move_if_noexcept_a<Body*, Body*, std::allocator<Body> >(Body*, Body*, Body*, std::allocator<Body>&)
+  [24] _ZN9__gnu_cxx13new_allocatorI4BodyE9constructIS1_IRKS1_EEEvPT_DpOT0_ [55] std::allocator_traits<std::allocator<Body> >::deallocate(std::allocator<Body>&, Body*, unsigned long) [62] unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&)
+  [65] __gnu_cxx::new_allocator<Body>::new_allocator() [56] std::allocator_traits<std::allocator<Body> >::allocate(std::allocator<Body>&, unsigned long) [36] std::remove_reference<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>::type&& std::move<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+  [66] __gnu_cxx::new_allocator<Body>::~new_allocator() [45] std::allocator_traits<std::allocator<Body> >::max_size(std::allocator<Body> const&) [21] Body&& std::forward<Body>(std::remove_reference<Body>::type&)
+  [28] bool __gnu_cxx::__is_null_pointer<char>(char*) [25] _ZNSt16allocator_traitsISaI4BodyEE9constructIS0_IRKS0_EEEvRS1_PT_DpOT0_ [14] Body const& std::forward<Body const&>(std::remove_reference<Body const&>::type&)
+  [40] __gnu_cxx::new_allocator<Body>::max_size() const [57] Body* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<Body*>, Body*>(std::move_iterator<Body*>, std::move_iterator<Body*>, Body*) [49] void std::_Destroy<Body*>(Body*, Body*)
+  [42] std::_Vector_base<Body, std::allocator<Body> >::_M_get_Tp_allocator() const [58] void std::vector<Body, std::allocator<Body> >::_M_emplace_back_aux<Body const&>(Body const&) [50] void std::_Destroy<Body*, Body>(Body*, Body*, std::allocator<Body>&)
+  [12] std::move_iterator<Body*>::base() const [26] std::vector<Body, std::allocator<Body> >::push_back(Body const&) [37] std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*)
+  [17] std::move_iterator<Body*>::operator*() const [73] std::vector<Body, std::allocator<Body> >::vector() [15] bool std::operator==<Body*>(std::move_iterator<Body*> const&, std::move_iterator<Body*> const&)
+  [53] std::vector<Body, std::allocator<Body> >::_M_check_len(unsigned long, char const*) const [74] std::vector<Body, std::allocator<Body> >::~vector() [16] bool std::operator!=<Body*>(std::move_iterator<Body*> const&, std::move_iterator<Body*> const&)
+  [39] std::vector<Body, std::allocator<Body> >::size() const [10] std::vector<Body, std::allocator<Body> >::operator[](unsigned long) [38] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+  [43] std::vector<Body, std::allocator<Body> >::max_size() const [29] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [13] operator new(unsigned long, void*)
+  [67] std::allocator<Body>::allocator() [30] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
+  [68] std::allocator<Body>::~allocator() [31] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)
