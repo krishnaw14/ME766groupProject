@@ -2,7 +2,6 @@
 #include<stdlib.h>
 #include<math.h>
 #include<fstream> //enables export to csv files
-//#include"twobodystruct.h"
 
 using namespace std;
 
