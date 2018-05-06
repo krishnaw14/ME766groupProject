@@ -1,6 +1,12 @@
 # ME766groupProject
+This zip file contains the following:
+n_body.cpp : O(n^2) serial code
+n_body-openmp.cpp : openMP parallelised O(n^2) code
+n_body-mpi.cpp : MPI parallelised O(n^2) code
 
-Reference for creating the data structure which supports the Barnes-Hut algorithm http://www.cs.princeton.edu/courses/archive/fall03/cs126/assignments/barnes-hut.html
+
+
+
 
 Link to the various data sets : https://bima.astro.umd.edu/nemo/archive/
 
