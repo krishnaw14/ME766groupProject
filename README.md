@@ -1,6 +1,9 @@
 # ME766groupProject
 This zip file contains the following:
 
+## Link to the github Repository
+https://github.com/krishnaw14/ME766groupProject
+
 ## Codes
 n_body.cpp : O(n^2) serial code
 
