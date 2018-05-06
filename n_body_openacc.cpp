@@ -4,13 +4,12 @@
 #include <vector>
 #include <string> 
 #include <fstream> 
-#include <mpi.h>
 #include <ctime>
 
 using namespace std;
 
 const double G = 0.00066741;  //True value of .0000000000667408 rounded off to 15 decimal places (precision of double)
-const double timestep = 0.1; // small time step in seconds
+const double timestep = 0.05; // small time step in seconds
 
 
 struct Body
@@ -24,7 +23,8 @@ struct Body
 		r[0]=0; r[1]=0;
 		v[0]=0; v[1]=0;
 	}
-	Body(double mass, double x, double y, double vel_x, double vel_y){ //constructor
+	Body(double mass, double x, double y, double vel_x, double vel_y)
+	{ //constructor
 		M = mass;
 		r[0] = x;
 		r[1] = y;
@@ -32,7 +32,7 @@ struct Body
 		v[1] = vel_y;
 	}
 	
-	void acceleration_update( vector<Body> body_array, int n)
+	void acceleration_update( vector<Body> &body_array, int n)
 	{
 		for (int i=0;i<n;i++)
 		{
@@ -53,7 +53,7 @@ struct Body
 		r[1] = r[1] + v[1]*timestep + (1.0/2)*a[1]*timestep*timestep ;
 	}
 
-	void v_update(vector<Body> body_array, int n){
+	void v_update(vector<Body> &body_array, int n){
 		v[0] = v[0] + (1.0/2)*a[0]*timestep;
 		v[1] = v[1] + (1.0/2)*a[1]*timestep;
 
@@ -72,13 +72,13 @@ struct Body
 
 int main(int argc, char ** argv)
 {
-	int n=1024;
+	int n=128;
 	vector<Body> body_array;
 
 	ifstream dataset;
 	double m,x,y,z, vx,vy,vz;
 
-	dataset.open("tab1024.txt");
+	dataset.open("tab128.txt");
 
 	while(dataset)
 	{
@@ -95,21 +95,9 @@ int main(int argc, char ** argv)
 
 	int h = duration/timestep; // h =number of iterations
 
-	int rank, size, num, start, i;
 	clock_t time1, time2;
 	double total_time;
 	time1=clock();
-
-	MPI_Status status;
-
-	MPI_Init(&argc, &argv);
-
-	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
-	MPI_Comm_size(MPI_COMM_WORLD,&size); 
-
-	num=n/size;
-
-	start = rank*num;
 
 	/*for (int i=0;i<n;i++)
 	{
@@ -117,35 +105,31 @@ int main(int argc, char ** argv)
 		body_array[i].print_r();
 	}*/
 
-	for(i=1; i<h; i++)
+	#pragma acc data copy(body_array[0:n]) /* array is copied to the device (gpu) before execution of the block and returned to the host (cpu) after computation */
 	{
-
-		for(int j=start;j<num+start;j++)
+		for(int i=1; i<=h; i++)
 		{
-			body_array[j].r_update();
-			body_array[j].v_update(body_array, n);
-
-			//cout<<"Body "+to_string(j);
-		    //body_array[j].print_r();
-		}
-
-	}
-
-	if(rank==0)
-	{
-		//cout<<"TOTAL TIME = "<<total_time<<endl;
-		if (i>=h)
-		{
-			time2 = clock();
-			total_time = (double)(time2-time1)/(CLOCKS_PER_SEC);
-			for (int k=0;k<n;k++)
+			#pragma acc parallel loop shared(body_array,n) 
+			for(int j=0;j<n;j++)
 			{
-				cout<<"Body"+to_string(k)+" ";
-				body_array[k].print_r();
+				body_array[j].r_update();
+				body_array[j].v_update(body_array, n);
+
+				//cout<<"Body "+to_string(j);
+		   		//body_array[j].print_r();
 			}
-			cout<<"TOTAL TIME = "<<total_time<<endl;
+			//body_array[0].print_r();
 		}
 	}
 
+	time2 = clock();
+
+	total_time =(double)(time2-time1)/(CLOCKS_PER_SEC);
+	cout<<"Total Time = "<<total_time<<endl;
+	/*for (int i=0;i<n;i++)
+	{
+		cout<<"Body"+to_string(i);
+		body_array[i].print_r();
+	}*/
 
 }
