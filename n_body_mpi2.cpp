@@ -63,9 +63,11 @@ struct Body
 		v[1] = v[1] + (1.0/2)*a[1]*timestep;
 	}
 
-	void print_r()
+	vector<double> return_r()
 	{
-		cout<<"x = "<<r[0]<<" y = "<<r[1]<<endl;
+		vector<double> radius(2);
+		radius[0] = r[0]; radius[1] = r[1];
+		return radius;
 	}
 
 };
@@ -116,6 +118,8 @@ int main(int argc, char ** argv)
 		cout<<"Body"+to_string(i);
 		body_array[i].print_r();
 	}*/
+	ofstream myfile;
+  	myfile.open ("output.txt");
 
 	for(i=1; i<h; i++)
 	{
@@ -124,12 +128,14 @@ int main(int argc, char ** argv)
 		{
 			body_array[j].r_update();
 			body_array[j].v_update(body_array, n);
+			myfile << body_array[j].return_r()[0] << " " << body_array[j].return_r()[1] << "\n";
 
 			//cout<<"Body "+to_string(j);
 		    //body_array[j].print_r();
 		}
 
 	}
+	myfile.close();
 
 	if(rank==0)
 	{

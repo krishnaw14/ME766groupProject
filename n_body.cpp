@@ -15,12 +15,11 @@ const double timestep = 0.05; // small time step in seconds
 struct Body
 { 
 	double M;
-	double r[2], v[2], a[2]; // defines acceleration of the body in the x and y directions; a[0] = a_x, a[1] = a_y; and likewise for r and v
-	
+	double r[2],v[2], a[2]; // defines acceleration of the body in the x and y directions; a[0] = a_x, a[1] = a_y; and likewise for r and v
 	Body()
 	{
-		M=1000; 
-		r[0]=0; r[1]=0;
+		M=1000;
+		r[0] = 0, r[1] = 0;
 		v[0]=0; v[1]=0;
 	}
 	Body(double mass, double x, double y, double vel_x, double vel_y)
@@ -63,9 +62,11 @@ struct Body
 		v[1] = v[1] + (1.0/2)*a[1]*timestep;
 	}
 
-	void print_r()
+	vector<double> return_r()
 	{
-		cout<<"x = "<<r[0]<<" y = "<<r[1]<<endl;
+		vector<double> radius(2);
+		radius[0] = r[0]; radius[1] = r[1];
+		return radius;
 	}
 
 };
@@ -104,22 +105,19 @@ int main(int argc, char ** argv)
 		cout<<"Body"+to_string(i);
 		body_array[i].print_r();
 	}*/
+	ofstream myfile;
+  	myfile.open ("output.txt");
 
 	for(int i=1; i<=h; i++)
 	{
-
 		for(int j=0;j<n;j++)
 		{
 			body_array[j].r_update();
 			body_array[j].v_update(body_array, n);
-
-			//cout<<"Body "+to_string(j);
-		    //body_array[j].print_r();
+			myfile << body_array[j].return_r()[0] << " " << body_array[j].return_r()[1] << "\n";
 		}
-		//body_array[0].print_r();
-
 	}
-
+	myfile.close();
 	time2 = clock();
 
 	total_time =(double)(time2-time1)/(CLOCKS_PER_SEC);
