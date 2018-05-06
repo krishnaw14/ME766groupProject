@@ -123,14 +123,15 @@ struct Body{
 	std::vector<double> velocity;
 	std::vector<double> acceleration;
 
-	Body(){
+	Body()
+	{
 		mass = 0;
 		coordinates.x = 0;
 		coordinates.y = 0;
-		velocity[0] = 0;
-		velocity[1] = 0;
-		acceleration[0] = 0;
-		acceleration[1] = 0;
+		velocity.push_back(0);
+		velocity.push_back(0);
+		acceleration.push_back(0);
+		acceleration.push_back(0);
 	}
 
 	Body(double m, double x_, double y_, double vx, double vy){
@@ -170,7 +171,8 @@ struct Body{
 	}*/
 };
 
-struct BHTreeNode{
+struct BHTreeNode
+{
 	Body body;
 	Quadrant Region;
 	BHTreeNode* NW ; // four sub-trees/sub-regions; children nodes
@@ -179,7 +181,8 @@ struct BHTreeNode{
 	BHTreeNode* SE ;
 	int NumberOfBodies; 
 
-	BHTreeNode(){
+	BHTreeNode()
+	{
 		/* default constructor */
 		NumberOfBodies = 0;
 		NW->NumberOfBodies = 0;
@@ -193,7 +196,8 @@ struct BHTreeNode{
 		SE->Region = *( Region.SE() );
 	}
 
-	BHTreeNode(Quadrant Q){
+	BHTreeNode(Quadrant Q)
+	{
 		/* constructor to create a Barnes-Hut Tree with no bodies and the given quadrant */
 		Region = Q;
 		/* initialising */
@@ -363,17 +367,27 @@ int main(){
 		Bodies.push_back(newBody);
 	} */
 
+	Quadrant R;
+
 	for(int j=0; j<2; j++){
 		cout<<Bodies[j].mass<<" "<<Bodies[j].coordinates.x<<" "<<Bodies[j].coordinates.y<<endl;
 	}
 
-	for(int i=0; i<numberOfIterations; i++){
+	for(int i=0; i<numberOfIterations; i++)
+	{
+		cout<<"Loop Check: "<<i<<endl;
 		BHTreeNode tree;
-		for(int j=0; j<2; j++){
+		cout<<"Alpha: "<<i<<endl;
+		for(int j=0; j<2; j++)
+		{
+			cout<<"Inner Loop Check: "<<j<<endl;
 			tree.insert(Bodies[j]);
+			cout<<"Inner Loop Check2: "<<j<<endl;
 		}
-
-		for(int j=0; j<2; j++){
+		cout<<"Loop Check2: "<<i<<endl;
+		//BHTreeNode tree;
+		for(int j=0; j<2; j++)
+		{
 			tree.updateForce(Bodies[j]);
 		}
 		// now Bodies[i].acceleration[] is a populated vector
