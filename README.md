@@ -31,5 +31,20 @@ Link to the various data sets : https://bima.astro.umd.edu/nemo/archive/
 ## PROFILING:
 analysis.txt : Generated code profile for n_body.cpp
 
+## Instructions for Compiling
+
+For openACC code: 
+$ pgc++ -acc -ta=host -Minfo=accel -o nbody n_body_openacc.cpp
+$ ./nbody
+
+For openmp code: 
+$ g++ n_body_openmp.cpp -fopenmp -o nbody
+$ ./nbody
+
+For MPI code: 
+$ g++ n_body_openmp.cpp -fopenmp -o nbody
+$ ./nbody
+
 ## NOTE 
 For compiling any of the codes, the corresponding dataset must be present in the same directory
+
