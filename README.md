@@ -1,8 +1,10 @@
-# ME766groupProject
-This zip file contains the following:
-
 ## Link to the github Repository
 https://github.com/krishnaw14/ME766groupProject
+
+# Parallel Code analysis of  N-body simulation
+This is the ME766 (High Performance Scientific Computing) course project report. Our objective was to make a simulation for the generic n-body system under gravitational forces using appropriate masses and initial conditions, analysing the time efficiency of the code with different parallel programming methods.
+
+This zip file contains the following:
 
 ## Codes
 n_body.cpp : O(n^2) serial code
