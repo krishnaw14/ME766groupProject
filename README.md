@@ -44,8 +44,8 @@ $ g++ n_body_openmp.cpp -fopenmp -o nbody
 $ ./nbody 
 
 For MPI code:       
-$ g++ n_body_openmp.cpp -fopenmp -o nbody  
-$ ./nbody
+$ mpic++ n_body_openmp.cpp -o nbody  
+$ mpirun -np 4 ./nbody
 
 ## NOTE 
 For compiling any of the codes, the corresponding dataset must be present in the same directory
