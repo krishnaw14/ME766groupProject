@@ -131,7 +131,7 @@ int main(int argc, char** argv)
 	checkError(err, "Unable to create program from source");
 
 	err = clBuildProgram(program, 0, NULL, NULL, NULL, NULL);
-	checkError(err, "Unable to build program program");
+	checkError(err, "Unable to build program");
 
 	kernel = clCreateKernel(program, "nbody_kernel", &err);
 	checkError(err, "Unable to create kernel");
