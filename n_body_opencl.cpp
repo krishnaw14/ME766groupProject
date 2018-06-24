@@ -62,9 +62,9 @@ int main(int argc, char** argv)
 		pos[k*4+3] = z;
 
 		vel[k*4+0] = vx;
-		vel[k*4+0] = vy;
-		vel[k*4+0] = vz;
-		vel[k*4+0] = 0.0f;
+		vel[k*4+1] = vy;
+		vel[k*4+2] = vz;
+		vel[k*4+3] = 0.0f;
 
 		k++;
 		
